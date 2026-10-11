@@ -1,0 +1,15 @@
+# Нормализация переносов строк
+* text=auto eol=lf
+
+# Бинарные файлы
+*.png binary
+*.jpg binary
+*.gif binary
+*.webp binary
+*.ico binary
+
+# Не показывать markdown в статистике языков
+*.md linguist-documentation
+
+# LICENSE и README — не считать языком
+LICENSE linguist-documentation
