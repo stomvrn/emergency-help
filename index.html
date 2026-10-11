@@ -14,9 +14,23 @@
 <meta name="author" content="Холин Иван Алексеевич (VanXo)">
 <meta name="urn" content="urn:vanxo:artifact:emergency-help:2.5.0">
 <meta name="license" content="CC0 · Public Domain">
-<meta name="description" content="Экстренная помощь простыми словами. Крупный шрифт. Работает офлайн. Установка как приложение. Бесплатно, без регистрации.">
+<meta name="description" content="Экстренная помощь простыми словами. 14 алгоритмов. Крупный шрифт. Работает офлайн. Бесплатно, без регистрации.">
 <meta name="keywords" content="первая помощь, экстренная помощь, скорая, СЛР, инсульт, инфаркт, 112, 103">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; worker-src 'self' blob:; img-src data: blob:; manifest-src 'self' blob:; font-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Экстренная помощь">
+<meta property="og:title" content="Экстренная помощь — крупно и просто">
+<meta property="og:description" content="14 алгоритмов первой помощи. Работает офлайн, без регистрации. По приказу Минздрава № 220н.">
+<meta property="og:image" content="https://stomvrn.github.io/emergency-help/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Экстренная помощь — приложение для не медиков">
+<meta property="og:url" content="https://stomvrn.github.io/emergency-help/">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Экстренная помощь — крупно и просто">
+<meta name="twitter:description" content="14 алгоритмов первой помощи. Работает офлайн.">
+<meta name="twitter:image" content="https://stomvrn.github.io/emergency-help/og.png">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; worker-src 'self' blob:; img-src 'self' data: blob:; manifest-src 'self' blob:; font-src 'none'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'">
 <script>
 (function(){
   try {
@@ -30,11 +44,7 @@
 </script>
 <title>Экстренная помощь — крупно и просто</title>
 <style>
-/* ═══════════════════════════════════════════════════════════════
-   TOKENS
-   ═══════════════════════════════════════════════════════════════ */
 :root{
-  /* Палитра — тёмная */
   --bg:#0a0906;--bg2:#161410;--bg3:#1f1c15;--bg4:#2a2519;
   --line:#2a2720;--line2:#4a4538;--line3:#6a6455;
   --t0:#f5efe0;--t1:#d8d1bc;--t2:#a89f8a;--t3:#6a6455;
@@ -45,22 +55,17 @@
   --or:#f0b350;--or-dim:rgba(240,179,80,.16);
   --cy:#6ec5c0;--cy-dim:rgba(110,197,192,.16);
   --gold:#e0b95e;--gold-dim:rgba(224,185,94,.16);
-  /* Шрифты */
   --fm:ui-monospace,'SF Mono','JetBrains Mono',Consolas,monospace;
   --f:-apple-system,BlinkMacSystemFont,system-ui,'Segoe UI',Roboto,sans-serif;
   --fs:Georgia,'Iowan Old Style','Times New Roman',serif;
-  /* Радиусы и тайминги */
   --r:18px;--rs:14px;--rx:10px;
   --ease:cubic-bezier(.22,1,.36,1);
-  /* Safe area */
   --safe-top:env(safe-area-inset-top,0px);
   --safe-bot:env(safe-area-inset-bottom,0px);
   --safe-l:env(safe-area-inset-left,0px);
   --safe-r:env(safe-area-inset-right,0px);
-  /* Размеры */
   --nav-h:84px;
   --header-h:calc(76px + var(--safe-top));
-  /* Масштаб шрифта пользователя */
   --font-scale:1;
 }
 [data-theme="light"]{
@@ -77,322 +82,128 @@
 }
 [data-font="large"]{--font-scale:1.18}
 [data-font="xlarge"]{--font-scale:1.4}
-
-/* ═══════════════════════════════════════════════════════════════
-   ГЛОБАЛЬНЫЙ RESET + ЗАЩИТА ОТ ГОРИЗОНТАЛЬНОГО OVERFLOW
-   ═══════════════════════════════════════════════════════════════ */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html{
-  height:100%;
-  /* Стабильная ширина скроллбара — предотвращает сдвиг layout */
-  scrollbar-gutter:stable;
-  /* Отсечь любой горизонтальный overflow без создания scroll-контейнера.
-     `clip` лучше `hidden` — не ломает position:sticky у потомков. */
-  overflow-x:clip;
-  overflow-y:scroll;
-}
-html,body{
-  /* Полностью запретить горизонтальный оверскролл — главная причина
-     «дёрганья в стороны» на iOS при свайпе от края экрана. */
-  overscroll-behavior-x:none;
-  overscroll-behavior-y:contain;
-}
+html{height:100%;scrollbar-gutter:stable;overflow-x:clip;overflow-y:scroll}
+html,body{overscroll-behavior-x:none;overscroll-behavior-y:contain}
 body{
-  font-family:var(--f);
-  font-size:calc(19px * var(--font-scale));
-  line-height:1.6;
+  font-family:var(--f);font-size:calc(19px * var(--font-scale));line-height:1.6;
   color:var(--t0);background:var(--bg);
   transition:background .3s,color .3s;
-  -webkit-font-smoothing:antialiased;
-  -webkit-text-size-adjust:100%;
-  min-height:100vh;min-height:100dvh;
-  overflow-x:clip;
+  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;
+  min-height:100vh;min-height:100dvh;overflow-x:clip;
 }
-
-/* Fallback для браузеров без поддержки `clip` */
 @supports not (overflow: clip){
   html,body{overflow-x:hidden}
 }
-
 ::selection{background:var(--gold-dim)}
-
-/* Интерактив — без 300мс задержки и без двойного тапа */
-button,a,[role="button"],[role="tab"],label{
-  touch-action:manipulation;
-  -webkit-user-select:none;
-  user-select:none;
-}
-button{
-  font-family:inherit;cursor:pointer;border:none;background:none;
-  color:inherit;font-size:inherit;
-}
+button,a,[role="button"],[role="tab"],label{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-size:inherit}
 a{color:var(--bl);text-decoration:none}
 a:hover{text-decoration:underline}
-
-:focus-visible{
-  outline:3px solid var(--gold);
-  outline-offset:3px;
-  border-radius:8px;
-}
-
-/* Все текстовые элементы — защита от длинных слов */
-h1,h2,h3,h4,p,li,span,div,button,a{
-  overflow-wrap:anywhere;
-  word-break:normal;
-}
-/* Отдельным — более агрессивная защита для карточек и заголовков */
-.card .n,.detail-t h1,.step .body .t,.cmd-lbl{
-  overflow-wrap:break-word;
-  word-break:break-word;
-  hyphens:auto;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   LAYOUT
-   ═══════════════════════════════════════════════════════════════ */
-.app{
-  display:flex;flex-direction:column;
-  min-height:100vh;min-height:100dvh;
-  max-width:1100px;margin:0 auto;width:100%;
-  min-width:0;
-}
-
-/* ─── HEADER ─── */
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:8px}
+h1,h2,h3,h4,p,li,span,div,button,a{overflow-wrap:anywhere;word-break:normal}
+.card .n,.detail-t h1,.step .body .t,.cmd-lbl{overflow-wrap:break-word;word-break:break-word;hyphens:auto}
+.app{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh;max-width:1100px;margin:0 auto;width:100%;min-width:0}
 .header{
   position:sticky;top:0;z-index:40;
   background:color-mix(in srgb,var(--bg) 92%,transparent);
-  backdrop-filter:saturate(180%) blur(24px);
-  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);
   border-bottom:1px solid var(--line);
   padding:calc(var(--safe-top) + 10px) calc(12px + var(--safe-r)) 10px calc(12px + var(--safe-l));
-  display:flex;align-items:center;gap:8px;
-  min-height:var(--header-h);
-  min-width:0;
+  display:flex;align-items:center;gap:8px;min-height:var(--header-h);min-width:0;
 }
 .header .brand{display:flex;align-items:center;gap:10px;flex:1;min-width:0}
 .header .mark{
   width:44px;height:44px;border-radius:12px;flex-shrink:0;
   background:linear-gradient(135deg,var(--red),var(--red2));
-  display:flex;align-items:center;justify-content:center;
-  color:#fff;
+  display:flex;align-items:center;justify-content:center;color:#fff;
   box-shadow:0 3px 10px var(--red-glow);
 }
 .header .mark svg{width:24px;height:24px}
-.header .name{
-  font-family:var(--fs);font-size:calc(19px * var(--font-scale));
-  font-style:italic;font-weight:700;line-height:1.15;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
-.header .sub{
-  font-family:var(--fm);font-size:calc(11px * var(--font-scale));
-  color:var(--t2);letter-spacing:.03em;margin-top:2px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-}
+.header .name{font-family:var(--fs);font-size:calc(19px * var(--font-scale));font-style:italic;font-weight:700;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.header .sub{font-family:var(--fm);font-size:calc(11px * var(--font-scale));color:var(--t2);letter-spacing:.03em;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .header .acts{display:flex;gap:6px;flex-shrink:0}
-
-/* ─── КНОПКИ В ШАПКЕ ─── */
-.btn-with-lbl,
-.back-btn{
-  min-width:60px;min-height:64px;padding:6px;
-  border-radius:14px;border:1px solid var(--line2);
-  background:var(--bg2);color:var(--t0);
-  display:inline-flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:3px;
-  transition:transform .15s var(--ease),background-color .15s;
-  flex-shrink:0;
+.btn-with-lbl,.back-btn{
+  min-width:60px;min-height:64px;padding:6px;border-radius:14px;
+  border:1px solid var(--line2);background:var(--bg2);color:var(--t0);
+  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  transition:transform .15s var(--ease),background-color .15s;flex-shrink:0;
 }
 .btn-with-lbl svg,.back-btn svg{width:22px;height:22px}
-.btn-with-lbl .btn-lbl,
-.back-btn .btn-lbl{
-  font-family:var(--fm);font-size:calc(10px * var(--font-scale));
-  font-weight:700;letter-spacing:.02em;text-transform:uppercase;
-  color:var(--t2);line-height:1;white-space:nowrap;
+.btn-with-lbl .btn-lbl,.back-btn .btn-lbl{
+  font-family:var(--fm);font-size:calc(10px * var(--font-scale));font-weight:700;
+  letter-spacing:.02em;text-transform:uppercase;color:var(--t2);line-height:1;white-space:nowrap;
 }
 .btn-with-lbl:active,.back-btn:active{transform:scale(.92);background:var(--bg3)}
 .btn-with-lbl.on{background:var(--gold);color:#0a0906;border-color:var(--gold)}
 .btn-with-lbl.on .btn-lbl{color:#0a0906}
 .back-btn{display:none}
 .back-btn.on{display:inline-flex}
-
-/* ─── CRUMBS ─── */
-.crumbs{
-  display:none;
-  padding:10px calc(16px + var(--safe-r)) 0 calc(16px + var(--safe-l));
-  font-family:var(--fm);font-size:calc(12px * var(--font-scale));
-  color:var(--t3);letter-spacing:.04em;text-transform:uppercase;
-}
+.crumbs{display:none;padding:10px calc(16px + var(--safe-r)) 0 calc(16px + var(--safe-l));font-family:var(--fm);font-size:calc(12px * var(--font-scale));color:var(--t3);letter-spacing:.04em;text-transform:uppercase}
 .crumbs.on{display:block}
 .crumbs .cur{color:var(--red);font-weight:700}
-
-/* ─── MAIN ─── */
-main{
-  flex:1;min-width:0;
-  padding:0 calc(14px + var(--safe-r)) calc(var(--nav-h) + var(--safe-bot) + 28px) calc(14px + var(--safe-l));
-}
+main{flex:1;min-width:0;padding:0 calc(14px + var(--safe-r)) calc(var(--nav-h) + var(--safe-bot) + 28px) calc(14px + var(--safe-l))}
 .page{display:none}
 .page.on{display:block;animation:fade .22s var(--ease)}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-/* ═══════════════════════════════════════════════════════════════
-   ГЛАВНАЯ
-   ═══════════════════════════════════════════════════════════════ */
 .sos-big{
-  display:flex;align-items:center;gap:16px;
-  width:100%;margin:12px 0 10px;
-  background:linear-gradient(135deg,var(--red),var(--red2));
-  color:#fff;border-radius:18px;padding:18px 20px;
-  box-shadow:0 5px 18px var(--red-glow);
-  transition:transform .15s var(--ease);
-  text-align:left;position:relative;overflow:hidden;border:none;
+  display:flex;align-items:center;gap:16px;width:100%;margin:12px 0 10px;
+  background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;border-radius:18px;
+  padding:18px 20px;box-shadow:0 5px 18px var(--red-glow);
+  transition:transform .15s var(--ease);text-align:left;position:relative;overflow:hidden;border:none;
 }
-.sos-big::after{
-  content:'';position:absolute;top:-40%;right:-20%;
-  width:200px;height:200px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);
-  pointer-events:none;
-}
+.sos-big::after{content:'';position:absolute;top:-40%;right:-20%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);pointer-events:none}
 .sos-big:active{transform:scale(.98)}
 .sos-big .ic{flex-shrink:0;display:flex;position:relative;z-index:1}
 .sos-big .ic svg{width:52px;height:52px}
 .sos-big .txt{flex:1;min-width:0;position:relative;z-index:1}
-.sos-big .lbl{
-  font-size:calc(23px * var(--font-scale));font-weight:900;
-  letter-spacing:-.01em;line-height:1.15;display:block;
-}
-.sos-big .hint{
-  font-size:calc(14px * var(--font-scale));opacity:.88;
-  margin-top:5px;line-height:1.4;display:block;
-}
-
+.sos-big .lbl{font-size:calc(23px * var(--font-scale));font-weight:900;letter-spacing:-.01em;line-height:1.15;display:block}
+.sos-big .hint{font-size:calc(14px * var(--font-scale));opacity:.88;margin-top:5px;line-height:1.4;display:block}
 .call-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
 @media(max-width:360px){.call-row{grid-template-columns:1fr}}
-.call-btn{
-  display:flex;align-items:center;gap:14px;
-  padding:20px 22px;border-radius:18px;
-  text-decoration:none;transition:transform .15s var(--ease);
-  min-height:88px;
-}
+.call-btn{display:flex;align-items:center;gap:14px;padding:20px 22px;border-radius:18px;text-decoration:none;transition:transform .15s var(--ease);min-height:88px}
 .call-btn:active{transform:scale(.97)}
 .call-btn .ic{flex-shrink:0;display:flex}
 .call-btn .ic svg{width:34px;height:34px}
-.call-btn .num{
-  font-family:var(--fm);font-size:calc(36px * var(--font-scale));
-  font-weight:900;line-height:1;letter-spacing:-.03em;flex-shrink:0;
-}
+.call-btn .num{font-family:var(--fm);font-size:calc(36px * var(--font-scale));font-weight:900;line-height:1;letter-spacing:-.03em;flex-shrink:0}
 .call-btn .lbl{font-size:calc(15px * var(--font-scale));font-weight:700;line-height:1.2}
-.call-btn .lbl small{
-  display:block;font-size:calc(12px * var(--font-scale));
-  font-weight:500;opacity:.85;margin-top:3px;line-height:1.3;
-}
-.call-btn.uni{
-  background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;
-  box-shadow:0 4px 14px var(--red-glow);
-}
+.call-btn .lbl small{display:block;font-size:calc(12px * var(--font-scale));font-weight:500;opacity:.85;margin-top:3px;line-height:1.3}
+.call-btn.uni{background:linear-gradient(135deg,var(--red),var(--red2));color:#fff;box-shadow:0 4px 14px var(--red-glow)}
 .call-btn.amb{background:var(--bg2);color:var(--t0);border:2px solid var(--red)}
-
-.quick-hero{
-  background:var(--bg2);border:1px solid var(--line);
-  border-left:6px solid var(--gold);
-  border-radius:var(--rs);padding:18px 22px;margin:14px 0 18px;
-  box-shadow:0 3px 12px rgba(0,0,0,.12);
-}
-.quick-hero .t{
-  font-family:var(--fm);font-size:calc(12px * var(--font-scale));
-  font-weight:800;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:12px;
-  display:flex;align-items:center;gap:8px;
-}
+.quick-hero{background:var(--bg2);border:1px solid var(--line);border-left:6px solid var(--gold);border-radius:var(--rs);padding:18px 22px;margin:14px 0 18px;box-shadow:0 3px 12px rgba(0,0,0,.12)}
+.quick-hero .t{font-family:var(--fm);font-size:calc(12px * var(--font-scale));font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px}
 .quick-hero .t svg{width:16px;height:16px}
-.quick-hero ol{
-  padding-left:28px;color:var(--t0);
-  font-size:calc(17px * var(--font-scale));line-height:1.7;
-}
+.quick-hero ol{padding-left:28px;color:var(--t0);font-size:calc(17px * var(--font-scale));line-height:1.7}
 .quick-hero ol li{margin-bottom:8px;padding-left:4px}
 .quick-hero ol li strong{color:var(--red);font-weight:800}
-
-.share-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 20px}
-@media(max-width:340px){.share-row{grid-template-columns:1fr}}
-.share-row .action-btn{width:100%;justify-content:center}
-
-/* ─── ФИЛЬТР ─── */
-.filter-bar{
-  display:flex;gap:8px;flex-wrap:wrap;
-  margin:14px 0 12px;align-items:center;min-width:0;
-}
-.chip{
-  padding:12px 18px;border-radius:22px;
-  font-family:var(--fm);font-size:calc(14px * var(--font-scale));
-  font-weight:700;letter-spacing:.02em;
-  border:2px solid var(--line2);background:transparent;color:var(--t2);
-  transition:transform .15s var(--ease),background-color .15s,border-color .15s;
-  min-height:56px;
-  display:inline-flex;align-items:center;gap:8px;
-  flex-shrink:0;
-}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 12px;align-items:center;min-width:0}
+.chip{padding:12px 18px;border-radius:22px;font-family:var(--fm);font-size:calc(14px * var(--font-scale));font-weight:700;letter-spacing:.02em;border:2px solid var(--line2);background:transparent;color:var(--t2);transition:transform .15s var(--ease),background-color .15s,border-color .15s;min-height:56px;display:inline-flex;align-items:center;gap:8px;flex-shrink:0}
 .chip svg{width:18px;height:18px;flex-shrink:0}
 .chip:active{transform:scale(.95)}
 .chip.on{background:var(--red);border-color:var(--red);color:#fff}
 .chip.on.crit{background:var(--red);border-color:var(--red)}
 .chip.on.warn{background:var(--or);border-color:var(--or);color:#1a1408}
 .chip.on.fav{background:var(--gold);border-color:var(--gold);color:#0a0906}
-
-/* ─── GRID ─── */
-.grid-title{
-  font-family:var(--fm);font-size:calc(12px * var(--font-scale));
-  font-weight:800;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--t3);
-  margin:24px 0 12px;display:flex;align-items:center;gap:12px;
-}
+.grid-title{font-family:var(--fm);font-size:calc(12px * var(--font-scale));font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin:24px 0 12px;display:flex;align-items:center;gap:12px}
 .grid-title::after{content:'';flex:1;height:1px;background:var(--line);min-width:20px}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:12px;min-width:0;
-}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;min-width:0}
 @media(max-width:400px){.grid{grid-template-columns:1fr 1fr;gap:10px}}
 @media(min-width:900px){.grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}}
-
 .card-wrap{position:relative;display:flex;min-width:0}
 .card-wrap .card{flex:1;min-width:0}
-.card{
-  background:var(--bg2);border:1px solid var(--line);
-  border-radius:var(--r);padding:20px 18px;
-  text-align:left;cursor:pointer;
-  transition:transform .18s var(--ease),border-color .15s,box-shadow .18s;
-  min-height:180px;
-  display:flex;flex-direction:column;justify-content:space-between;
-  position:relative;overflow:hidden;color:var(--t0);
-  border-left:5px solid var(--line3);font:inherit;
-  width:100%;min-width:0;
-}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 18px;text-align:left;cursor:pointer;transition:transform .18s var(--ease),border-color .15s,box-shadow .18s;min-height:180px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;color:var(--t0);border-left:5px solid var(--line3);font:inherit;width:100%;min-width:0}
 .card:active{transform:scale(.97);border-color:var(--gold)}
-@media(hover:hover){
-  .card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.22)}
-}
+@media(hover:hover){.card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.22)}}
 .card .ic{display:block;margin-bottom:12px;color:var(--t1);filter:drop-shadow(0 2px 5px rgba(0,0,0,.18))}
 .card .ic svg{width:48px;height:48px}
-.card .n{
-  font-weight:800;font-size:calc(17px * var(--font-scale));
-  color:var(--t0);line-height:1.25;letter-spacing:-.01em;display:block;
-}
-.card .h{
-  font-size:calc(13px * var(--font-scale));
-  color:var(--t2);margin-top:6px;line-height:1.4;display:block;
-}
-.card .arrow{
-  position:absolute;bottom:14px;right:14px;
-  color:var(--t3);opacity:.5;display:flex;
-}
+.card .n{font-weight:800;font-size:calc(17px * var(--font-scale));color:var(--t0);line-height:1.25;letter-spacing:-.01em;display:block}
+.card .h{font-size:calc(13px * var(--font-scale));color:var(--t2);margin-top:6px;line-height:1.4;display:block}
+.card .arrow{position:absolute;bottom:14px;right:14px;color:var(--t3);opacity:.5;display:flex}
 .card .arrow svg{width:20px;height:20px}
-
 .card.crit{border-left-color:var(--red)}
 .card.crit .n{color:var(--red)}
 .card.crit .ic{color:var(--red)}
-.card.crit-deep{
-  border-left-color:var(--red-deep);
-  background:linear-gradient(135deg,var(--bg2),rgba(122,24,24,.10));
-}
+.card.crit-deep{border-left-color:var(--red-deep);background:linear-gradient(135deg,var(--bg2),rgba(122,24,24,.10))}
 .card.crit-deep .n{color:var(--red)}
 .card.crit-deep .ic{color:var(--red)}
 .card.warn{border-left-color:var(--or)}
@@ -401,139 +212,47 @@ main{
 .card.help{border-left-color:var(--cy)}
 .card.help .n{color:var(--cy)}
 .card.help .ic{color:var(--cy)}
-
-.star-btn{
-  position:absolute;top:6px;right:6px;
-  width:44px;height:44px;border-radius:50%;
-  background:color-mix(in srgb,var(--bg2) 80%,transparent);
-  color:var(--t3);display:flex;align-items:center;justify-content:center;
-  border:none;z-index:2;
-  transition:transform .15s var(--ease),color .15s;
-  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-}
+.star-btn{position:absolute;top:6px;right:6px;width:44px;height:44px;border-radius:50%;background:color-mix(in srgb,var(--bg2) 80%,transparent);color:var(--t3);display:flex;align-items:center;justify-content:center;border:none;z-index:2;transition:transform .15s var(--ease),color .15s;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .star-btn svg{width:22px;height:22px}
 .star-btn:active{transform:scale(.85)}
 .star-btn.on{color:var(--gold)}
-
-/* ═══════════════════════════════════════════════════════════════
-   DETAIL
-   ═══════════════════════════════════════════════════════════════ */
-.detail-head{
-  display:flex;align-items:flex-start;gap:18px;
-  padding:20px 0;border-bottom:1px solid var(--line);margin-bottom:18px;
-  min-width:0;
-}
-.detail-ic{
-  flex-shrink:0;display:flex;color:var(--red);
-  filter:drop-shadow(0 3px 8px rgba(0,0,0,.22));
-}
+.detail-head{display:flex;align-items:flex-start;gap:18px;padding:20px 0;border-bottom:1px solid var(--line);margin-bottom:18px;min-width:0}
+.detail-ic{flex-shrink:0;display:flex;color:var(--red);filter:drop-shadow(0 3px 8px rgba(0,0,0,.22))}
 .detail-ic svg{width:72px;height:72px}
 .detail-t{flex:1;min-width:0}
-.detail-t h1{
-  font-family:var(--fs);font-size:calc(27px * var(--font-scale));
-  font-style:italic;font-weight:700;line-height:1.15;
-  margin-bottom:8px;color:var(--t0);
-}
+.detail-t h1{font-family:var(--fs);font-size:calc(27px * var(--font-scale));font-style:italic;font-weight:700;line-height:1.15;margin-bottom:8px;color:var(--t0)}
 .detail-t .sub{font-size:calc(16px * var(--font-scale));color:var(--t1);line-height:1.5}
-
 .detail-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-.action-btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  padding:18px 22px;font-size:calc(17px * var(--font-scale));
-  font-weight:700;border-radius:14px;
-  border:2px solid var(--line2);background:var(--bg2);
-  color:var(--t0);
-  transition:transform .15s var(--ease),background-color .15s;
-  text-decoration:none;min-height:64px;font-family:inherit;
-}
+.action-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:18px 22px;font-size:calc(17px * var(--font-scale));font-weight:700;border-radius:14px;border:2px solid var(--line2);background:var(--bg2);color:var(--t0);transition:transform .15s var(--ease),background-color .15s;text-decoration:none;min-height:64px;font-family:inherit}
 .action-btn svg{width:22px;height:22px}
 .action-btn:active{transform:scale(.96)}
 .action-btn.primary{background:var(--gold);border-color:var(--gold);color:#0a0906}
 .action-btn.danger{background:var(--red);border-color:var(--red);color:#fff}
 .action-btn.ghost{background:transparent;color:var(--t1)}
-
-.progress-bar{
-  position:sticky;top:var(--header-h);z-index:30;
-  background:color-mix(in srgb,var(--bg) 94%,transparent);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-  padding:14px 0 12px;margin:0 -14px 18px;
-  padding-left:calc(14px + var(--safe-l));
-  padding-right:calc(14px + var(--safe-r));
-  border-bottom:1px solid var(--line);
-}
-.progress-bar .row{
-  display:flex;align-items:center;gap:14px;
-  font-family:var(--fm);font-size:calc(13px * var(--font-scale));
-  color:var(--t2);text-transform:uppercase;letter-spacing:.05em;font-weight:700;
-}
+.progress-bar{position:sticky;top:var(--header-h);z-index:30;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:14px 0 12px;margin:0 -14px 18px;padding-left:calc(14px + var(--safe-l));padding-right:calc(14px + var(--safe-r));border-bottom:1px solid var(--line)}
+.progress-bar .row{display:flex;align-items:center;gap:14px;font-family:var(--fm);font-size:calc(13px * var(--font-scale));color:var(--t2);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
 .progress-bar .track{flex:1;height:12px;background:var(--bg3);border-radius:6px;overflow:hidden;min-width:0}
-.progress-bar .fill{
-  height:100%;background:linear-gradient(90deg,var(--gold),var(--gr));
-  transition:width .3s var(--ease);border-radius:6px;
-}
-.progress-bar .pct{
-  font-family:var(--fm);font-size:calc(15px * var(--font-scale));
-  font-weight:800;color:var(--t0);flex-shrink:0;
-}
-
+.progress-bar .fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gr));transition:width .3s var(--ease);border-radius:6px}
+.progress-bar .pct{font-family:var(--fm);font-size:calc(15px * var(--font-scale));font-weight:800;color:var(--t0);flex-shrink:0}
 .steps{display:flex;flex-direction:column;gap:14px;margin-bottom:22px}
-.step{
-  background:var(--bg2);border:1px solid var(--line);
-  border-radius:var(--r);padding:20px 22px;
-  display:flex;gap:18px;align-items:flex-start;
-  transition:opacity .2s var(--ease),border-color .15s;
-  cursor:pointer;position:relative;
-  text-align:left;width:100%;color:inherit;
-  min-height:80px;font:inherit;
-}
+.step{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;display:flex;gap:18px;align-items:flex-start;transition:opacity .2s var(--ease),border-color .15s;cursor:pointer;position:relative;text-align:left;width:100%;color:inherit;min-height:80px;font:inherit}
 .step:active{transform:scale(.99)}
 .step.done{opacity:.55}
-.step.done .t{
-  text-decoration:line-through;
-  text-decoration-color:var(--gr);
-  text-decoration-thickness:2px;
-}
-.step .checkbox{
-  width:40px;height:40px;border-radius:50%;flex-shrink:0;
-  background:var(--gold);color:#0a0906;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--fm);font-weight:900;font-size:20px;
-  transition:background-color .2s;position:relative;
-}
+.step.done .t{text-decoration:line-through;text-decoration-color:var(--gr);text-decoration-thickness:2px}
+.step .checkbox{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:var(--gold);color:#0a0906;display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-weight:900;font-size:20px;transition:background-color .2s;position:relative}
 .step.done .checkbox{background:var(--gr);color:#fff}
 .step.done .checkbox .num-text{display:none}
-.step.done .checkbox::after{
-  content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/26px no-repeat;
-}
+.step.done .checkbox::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E") center/26px no-repeat}
 .step .body{flex:1;min-width:0}
-.step .body .t{
-  font-weight:800;font-size:calc(19px * var(--font-scale));
-  color:var(--t0);line-height:1.3;margin-bottom:8px;display:block;
-}
-.step .body .d{
-  font-size:calc(17px * var(--font-scale));
-  color:var(--t1);line-height:1.6;display:block;
-}
+.step .body .t{font-weight:800;font-size:calc(19px * var(--font-scale));color:var(--t0);line-height:1.3;margin-bottom:8px;display:block}
+.step .body .d{font-size:calc(17px * var(--font-scale));color:var(--t1);line-height:1.6;display:block}
 .step.crit{border-left:5px solid var(--red)}
 .step.crit .checkbox{background:var(--red);color:#fff}
 .step.crit .body .t{color:var(--red)}
-
-/* ─── CARD-СТАТУС ─── */
-.check-card{
-  background:var(--bg2);border:1px solid var(--line);
-  border-left:6px solid var(--bl);
-  border-radius:var(--r);padding:20px 24px;margin-bottom:20px;
-  transition:border-color .25s,background-color .25s;
-}
+.check-card{background:var(--bg2);border:1px solid var(--line);border-left:6px solid var(--bl);border-radius:var(--r);padding:20px 24px;margin-bottom:20px;transition:border-color .25s,background-color .25s}
 .check-card.all-done{border-left-color:var(--gr);background:linear-gradient(135deg,var(--bg2),var(--gr-dim))}
 .check-card.some-done{border-left-color:var(--or);background:linear-gradient(135deg,var(--bg2),var(--or-dim))}
-.check-card .t{
-  font-family:var(--fm);font-size:calc(13px * var(--font-scale));
-  font-weight:900;letter-spacing:.12em;text-transform:uppercase;
-  margin-bottom:12px;display:flex;align-items:center;gap:10px;
-  color:var(--bl);
-}
+.check-card .t{font-family:var(--fm);font-size:calc(13px * var(--font-scale));font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;color:var(--bl)}
 .check-card .t svg{width:20px;height:20px}
 .check-card.all-done .t{color:var(--gr)}
 .check-card.some-done .t{color:var(--or)}
@@ -542,375 +261,113 @@ main{
 .check-card.all-done .msg b{color:var(--gr)}
 .check-card .missing{margin-top:10px;font-size:calc(16px * var(--font-scale));color:var(--t1);line-height:1.5}
 .check-card .missing b{color:var(--or);font-weight:800}
-
-.warning-block{
-  background:var(--red-dim);border:1px solid rgba(224,69,69,.30);
-  border-left:6px solid var(--red);
-  border-radius:var(--r);padding:20px 24px;margin-bottom:20px;
-}
-.warning-block .t{
-  font-family:var(--fm);font-size:calc(13px * var(--font-scale));
-  font-weight:900;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--red);margin-bottom:14px;
-  display:flex;align-items:center;gap:10px;
-}
+.warning-block{background:var(--red-dim);border:1px solid rgba(224,69,69,.30);border-left:6px solid var(--red);border-radius:var(--r);padding:20px 24px;margin-bottom:20px}
+.warning-block .t{font-family:var(--fm);font-size:calc(13px * var(--font-scale));font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .warning-block .t svg{width:20px;height:20px}
 .warning-block ul{list-style:none;padding:0;margin:0}
-.warning-block li{
-  padding:10px 0;font-size:calc(17px * var(--font-scale));
-  color:var(--t0);line-height:1.55;
-  display:flex;gap:14px;align-items:flex-start;
-}
-.warning-block li::before{
-  content:'✕';color:var(--red);font-weight:900;flex-shrink:0;
-  font-size:18px;line-height:1.55;width:22px;text-align:center;
-}
+.warning-block li{padding:10px 0;font-size:calc(17px * var(--font-scale));color:var(--t0);line-height:1.55;display:flex;gap:14px;align-items:flex-start}
+.warning-block li::before{content:'✕';color:var(--red);font-weight:900;flex-shrink:0;font-size:18px;line-height:1.55;width:22px;text-align:center}
 .warning-block li:not(:last-child){border-bottom:1px dashed rgba(224,69,69,.20)}
-
-.note-block{
-  background:var(--gr-dim);border:1px solid rgba(123,196,127,.32);
-  border-left:6px solid var(--gr);
-  border-radius:var(--r);padding:20px 24px;margin-bottom:20px;
-}
-.note-block .t{
-  font-family:var(--fm);font-size:calc(13px * var(--font-scale));
-  font-weight:900;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--gr);margin-bottom:12px;
-  display:flex;align-items:center;gap:10px;
-}
+.note-block{background:var(--gr-dim);border:1px solid rgba(123,196,127,.32);border-left:6px solid var(--gr);border-radius:var(--r);padding:20px 24px;margin-bottom:20px}
+.note-block .t{font-family:var(--fm);font-size:calc(13px * var(--font-scale));font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gr);margin-bottom:12px;display:flex;align-items:center;gap:10px}
 .note-block .t svg{width:20px;height:20px}
-.note-block .d{
-  font-size:calc(17px * var(--font-scale));
-  color:var(--t1);line-height:1.65;
-}
-
-/* ─── ТАЙМЕР ПРИСТУПА ─── */
-.seizure-timer{
-  background:linear-gradient(135deg,var(--or),#b8800f);
-  border:2px solid var(--or);border-radius:var(--r);
-  padding:18px 22px;margin-bottom:18px;
-  display:flex;align-items:center;gap:16px;color:#1a1408;
-}
-.seizure-timer.alert{
-  background:linear-gradient(135deg,var(--red),var(--red2));
-  border-color:var(--red);color:#fff;
-  animation:pulseTimer 1.6s ease-in-out infinite;
-}
-@keyframes pulseTimer{
-  0%,100%{box-shadow:0 0 0 0 var(--red-glow)}
-  50%{box-shadow:0 0 0 6px transparent}
-}
+.note-block .d{font-size:calc(17px * var(--font-scale));color:var(--t1);line-height:1.65}
+.seizure-timer{background:linear-gradient(135deg,var(--or),#b8800f);border:2px solid var(--or);border-radius:var(--r);padding:18px 22px;margin-bottom:18px;display:flex;align-items:center;gap:16px;color:#1a1408}
+.seizure-timer.alert{background:linear-gradient(135deg,var(--red),var(--red2));border-color:var(--red);color:#fff;animation:pulseTimer 1.6s ease-in-out infinite}
+@keyframes pulseTimer{0%,100%{box-shadow:0 0 0 0 var(--red-glow)}50%{box-shadow:0 0 0 6px transparent}}
 .seizure-timer .ic{flex-shrink:0;display:flex}
 .seizure-timer .ic svg{width:44px;height:44px}
-.seizure-timer .t{
-  font-family:var(--fm);font-size:calc(12px * var(--font-scale));
-  font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-  opacity:.85;line-height:1.3;
-}
-.seizure-timer .time{
-  font-family:var(--fm);font-size:calc(32px * var(--font-scale));
-  font-weight:900;line-height:1.1;margin-top:4px;
-}
-
-/* ─── МЕТРОНОМ ─── */
-.metronome-panel{
-  background:linear-gradient(135deg,var(--red2),var(--red-deep));
-  border:1px solid var(--red);border-radius:var(--r);
-  padding:20px 22px;margin-bottom:18px;color:#fff;
-}
-.metronome-panel .t{
-  font-family:var(--fm);font-size:calc(12px * var(--font-scale));
-  font-weight:900;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.9);margin-bottom:14px;
-  display:flex;align-items:center;gap:10px;
-}
-.metronome-panel .t .dot{
-  width:12px;height:12px;border-radius:50%;background:#fff;
-  animation:pulseDot 1.1s ease-in-out infinite;
-}
+.seizure-timer .t{font-family:var(--fm);font-size:calc(12px * var(--font-scale));font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.85;line-height:1.3}
+.seizure-timer .time{font-family:var(--fm);font-size:calc(32px * var(--font-scale));font-weight:900;line-height:1.1;margin-top:4px}
+.metronome-panel{background:linear-gradient(135deg,var(--red2),var(--red-deep));border:1px solid var(--red);border-radius:var(--r);padding:20px 22px;margin-bottom:18px;color:#fff}
+.metronome-panel .t{font-family:var(--fm);font-size:calc(12px * var(--font-scale));font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.9);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.metronome-panel .t .dot{width:12px;height:12px;border-radius:50%;background:#fff;animation:pulseDot 1.1s ease-in-out infinite}
 @keyframes pulseDot{0%,100%{opacity:1}50%{opacity:.5}}
 .metronome-panel .row{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
-.metronome-panel .bpm{
-  font-family:var(--fm);font-size:calc(46px * var(--font-scale));
-  font-weight:900;line-height:1;
-}
-.metronome-panel .bpm small{
-  font-size:calc(14px * var(--font-scale));font-weight:600;
-  opacity:.75;display:block;margin-top:4px;letter-spacing:.05em;
-}
+.metronome-panel .bpm{font-family:var(--fm);font-size:calc(46px * var(--font-scale));font-weight:900;line-height:1}
+.metronome-panel .bpm small{font-size:calc(14px * var(--font-scale));font-weight:600;opacity:.75;display:block;margin-top:4px;letter-spacing:.05em}
 .metronome-panel .actions{display:flex;gap:10px;flex-wrap:wrap;margin-left:auto}
-.metronome-panel .met-btn{
-  background:rgba(255,255,255,.18);
-  border:2px solid rgba(255,255,255,.35);
-  color:#fff;padding:16px 22px;border-radius:12px;
-  font-weight:700;font-size:calc(16px * var(--font-scale));
-  transition:transform .15s var(--ease),background-color .15s;
-  min-height:60px;
-  display:inline-flex;align-items:center;gap:10px;
-}
+.metronome-panel .met-btn{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);color:#fff;padding:16px 22px;border-radius:12px;font-weight:700;font-size:calc(16px * var(--font-scale));transition:transform .15s var(--ease),background-color .15s;min-height:60px;display:inline-flex;align-items:center;gap:10px}
 .metronome-panel .met-btn svg{width:22px;height:22px}
 .metronome-panel .met-btn:active{transform:scale(.95);background:rgba(255,255,255,.3)}
 .metronome-panel .met-btn.on{background:#fff;color:var(--red-deep);border-color:#fff}
-
-/* ─── DOC ─── */
-.doc{
-  background:var(--bg2);border:1px solid var(--line);
-  border-radius:var(--r);padding:24px 26px;margin-bottom:16px;
-}
-.doc h2{
-  font-family:var(--fs);font-size:calc(25px * var(--font-scale));
-  font-style:italic;font-weight:700;margin-bottom:14px;line-height:1.2;
-}
-.doc h3{
-  font-family:var(--fm);font-size:calc(13px * var(--font-scale));
-  font-weight:900;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--gold);margin:22px 0 10px;
-}
+.doc{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:16px}
+.doc h2{font-family:var(--fs);font-size:calc(25px * var(--font-scale));font-style:italic;font-weight:700;margin-bottom:14px;line-height:1.2}
+.doc h3{font-family:var(--fm);font-size:calc(13px * var(--font-scale));font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:22px 0 10px}
 .doc h3:first-child{margin-top:0}
-.doc p{
-  color:var(--t1);margin-bottom:12px;line-height:1.7;
-  font-size:calc(17px * var(--font-scale));
-}
-.doc ol,.doc ul{
-  padding-left:28px;color:var(--t1);line-height:1.75;
-  font-size:calc(17px * var(--font-scale));
-}
+.doc p{color:var(--t1);margin-bottom:12px;line-height:1.7;font-size:calc(17px * var(--font-scale))}
+.doc ol,.doc ul{padding-left:28px;color:var(--t1);line-height:1.75;font-size:calc(17px * var(--font-scale))}
 .doc li{margin-bottom:10px}
 .doc li strong{color:var(--t0)}
-.doc code{
-  font-family:var(--fm);background:var(--bg3);
-  padding:3px 10px;border-radius:6px;color:var(--gold);
-  font-size:calc(15px * var(--font-scale));
-}
-.callout{
-  background:var(--bg3);border-left:6px solid var(--bl);
-  border-radius:0 var(--rs) var(--rs) 0;
-  padding:16px 22px;margin:16px 0;color:var(--t0);
-  font-size:calc(17px * var(--font-scale));line-height:1.65;
-}
+.doc code{font-family:var(--fm);background:var(--bg3);padding:3px 10px;border-radius:6px;color:var(--gold);font-size:calc(15px * var(--font-scale))}
+.callout{background:var(--bg3);border-left:6px solid var(--bl);border-radius:0 var(--rs) var(--rs) 0;padding:16px 22px;margin:16px 0;color:var(--t0);font-size:calc(17px * var(--font-scale));line-height:1.65}
 .callout.warn{border-left-color:var(--or);background:var(--or-dim)}
 .callout.danger{border-left-color:var(--red);background:var(--red-dim)}
 .callout.good{border-left-color:var(--gr);background:var(--gr-dim)}
-
-.setting-row{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:14px;padding:18px 0;border-bottom:1px solid var(--line);
-}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 0;border-bottom:1px solid var(--line)}
 .setting-row:last-child{border-bottom:none}
-.setting-row .lbl{
-  font-weight:700;font-size:calc(17px * var(--font-scale));
-  color:var(--t0);margin-bottom:4px;
-}
-.setting-row .sub{
-  font-size:calc(14px * var(--font-scale));
-  color:var(--t2);line-height:1.4;
-}
-.setting-row .ctrl{
-  display:flex;gap:4px;flex-shrink:0;
-  background:var(--bg3);border-radius:12px;padding:4px;
-  border:1px solid var(--line);
-}
-.setting-row .ctrl button{
-  padding:12px 16px;border-radius:9px;
-  font-family:var(--fm);font-size:calc(13px * var(--font-scale));
-  font-weight:700;letter-spacing:.02em;color:var(--t2);
-  transition:background-color .15s,color .15s;min-height:44px;
-}
+.setting-row .lbl{font-weight:700;font-size:calc(17px * var(--font-scale));color:var(--t0);margin-bottom:4px}
+.setting-row .sub{font-size:calc(14px * var(--font-scale));color:var(--t2);line-height:1.4}
+.setting-row .ctrl{display:flex;gap:4px;flex-shrink:0;background:var(--bg3);border-radius:12px;padding:4px;border:1px solid var(--line)}
+.setting-row .ctrl button{padding:12px 16px;border-radius:9px;font-family:var(--fm);font-size:calc(13px * var(--font-scale));font-weight:700;letter-spacing:.02em;color:var(--t2);transition:background-color .15s,color .15s;min-height:44px}
 .setting-row .ctrl button.on{background:var(--gold);color:#0a0906}
-
-/* ═══════════════════════════════════════════════════════════════
-   НИЖНЯЯ НАВИГАЦИЯ
-   ═══════════════════════════════════════════════════════════════ */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:50;
-  display:grid;grid-template-columns:repeat(4,1fr);
-  padding:10px calc(8px + var(--safe-r)) calc(10px + var(--safe-bot)) calc(8px + var(--safe-l));
-  background:color-mix(in srgb,var(--bg2) 94%,transparent);
-  backdrop-filter:saturate(180%) blur(24px);
-  -webkit-backdrop-filter:saturate(180%) blur(24px);
-  border-top:2px solid var(--line);
-  box-shadow:0 -6px 22px rgba(0,0,0,.20);
-}
-.bottom-nav button{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:4px;padding:10px 4px;min-height:64px;border-radius:14px;
-  color:var(--t3);
-  transition:transform .15s var(--ease),color .15s;
-  position:relative;
-}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:50;display:grid;grid-template-columns:repeat(4,1fr);padding:10px calc(8px + var(--safe-r)) calc(10px + var(--safe-bot)) calc(8px + var(--safe-l));background:color-mix(in srgb,var(--bg2) 94%,transparent);backdrop-filter:saturate(180%) blur(24px);-webkit-backdrop-filter:saturate(180%) blur(24px);border-top:2px solid var(--line);box-shadow:0 -6px 22px rgba(0,0,0,.20)}
+.bottom-nav button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:10px 4px;min-height:64px;border-radius:14px;color:var(--t3);transition:transform .15s var(--ease),color .15s;position:relative}
 .bottom-nav button:active{transform:scale(.94)}
 .bottom-nav button .ic{transition:transform .15s;display:flex}
 .bottom-nav button .ic svg{width:26px;height:26px}
-.bottom-nav button .lbl{
-  font-family:var(--fm);font-size:calc(11px * var(--font-scale));
-  font-weight:700;letter-spacing:.02em;text-transform:uppercase;
-}
+.bottom-nav button .lbl{font-family:var(--fm);font-size:calc(11px * var(--font-scale));font-weight:700;letter-spacing:.02em;text-transform:uppercase}
 .bottom-nav button.on{color:var(--red)}
 .bottom-nav button.on .ic{transform:scale(1.12)}
-
-/* ═══════════════════════════════════════════════════════════════
-   КОМАНДНАЯ ПАНЕЛЬ
-   ═══════════════════════════════════════════════════════════════ */
 .cmd-panel{position:fixed;inset:0;z-index:100;display:none}
 .cmd-panel.on{display:block}
-.cmd-backdrop{
-  position:absolute;inset:0;
-  background:rgba(0,0,0,.55);
-  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  animation:cmdFade .2s var(--ease);
-}
+.cmd-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);animation:cmdFade .2s var(--ease)}
 @keyframes cmdFade{from{opacity:0}to{opacity:1}}
-.cmd-sheet{
-  position:absolute;left:0;right:0;bottom:0;
-  background:var(--bg2);
-  border-top-left-radius:22px;border-top-right-radius:22px;
-  border-top:2px solid var(--line2);
-  max-height:88vh;overflow-y:auto;
-  padding:16px 16px calc(24px + var(--safe-bot)) 16px;
-  animation:cmdUp .25s var(--ease);
-  box-shadow:0 -8px 30px rgba(0,0,0,.4);
-  /* will-change только на время анимации — потом убирается через JS */
-}
+.cmd-sheet{position:absolute;left:0;right:0;bottom:0;background:var(--bg2);border-top-left-radius:22px;border-top-right-radius:22px;border-top:2px solid var(--line2);max-height:88vh;overflow-y:auto;padding:16px 16px calc(24px + var(--safe-bot)) 16px;animation:cmdUp .25s var(--ease);box-shadow:0 -8px 30px rgba(0,0,0,.4)}
 @keyframes cmdUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.cmd-head{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:4px 8px 14px;border-bottom:1px solid var(--line);margin-bottom:12px;
-}
-.cmd-title{
-  font-family:var(--fs);font-size:calc(24px * var(--font-scale));
-  font-style:italic;font-weight:700;
-}
-.cmd-close{
-  width:48px;height:48px;border-radius:50%;
-  background:var(--bg3);color:var(--t0);
-  display:flex;align-items:center;justify-content:center;
-  border:1px solid var(--line2);
-}
+.cmd-head{display:flex;align-items:center;justify-content:space-between;padding:4px 8px 14px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.cmd-title{font-family:var(--fs);font-size:calc(24px * var(--font-scale));font-style:italic;font-weight:700}
+.cmd-close{width:48px;height:48px;border-radius:50%;background:var(--bg3);color:var(--t0);display:flex;align-items:center;justify-content:center;border:1px solid var(--line2)}
 .cmd-close svg{width:24px;height:24px}
 .cmd-close:active{transform:scale(.9)}
-
-.cmd-section{
-  padding:8px 8px 4px;
-  font-family:var(--fm);font-size:calc(11px * var(--font-scale));
-  font-weight:800;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--t3);margin-top:8px;
-}
-.cmd-item{
-  display:flex;align-items:center;gap:14px;
-  width:100%;padding:16px;margin-bottom:8px;
-  border-radius:14px;background:var(--bg3);
-  border:1px solid var(--line);
-  text-align:left;color:var(--t0);
-  transition:transform .15s var(--ease),background-color .15s;
-  min-height:76px;font:inherit;
-}
+.cmd-section{padding:8px 8px 4px;font-family:var(--fm);font-size:calc(11px * var(--font-scale));font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);margin-top:8px}
+.cmd-item{display:flex;align-items:center;gap:14px;width:100%;padding:16px;margin-bottom:8px;border-radius:14px;background:var(--bg3);border:1px solid var(--line);text-align:left;color:var(--t0);transition:transform .15s var(--ease),background-color .15s;min-height:76px;font:inherit}
 .cmd-item:active{transform:scale(.98);background:var(--bg4)}
-.cmd-item .cmd-ic{
-  width:48px;height:48px;flex-shrink:0;border-radius:12px;
-  background:var(--bg4);color:var(--t1);
-  display:flex;align-items:center;justify-content:center;
-}
+.cmd-item .cmd-ic{width:48px;height:48px;flex-shrink:0;border-radius:12px;background:var(--bg4);color:var(--t1);display:flex;align-items:center;justify-content:center}
 .cmd-item .cmd-ic svg{width:26px;height:26px}
 .cmd-item.danger .cmd-ic{background:var(--red-dim);color:var(--red)}
 .cmd-item.primary .cmd-ic{background:var(--gold-dim);color:var(--gold)}
 .cmd-item .cmd-body{flex:1;min-width:0}
-.cmd-item .cmd-lbl{
-  font-weight:800;font-size:calc(17px * var(--font-scale));
-  line-height:1.2;display:block;margin-bottom:3px;
-}
-.cmd-item .cmd-sub{
-  font-size:calc(13px * var(--font-scale));
-  color:var(--t2);line-height:1.35;display:block;
-}
+.cmd-item .cmd-lbl{font-weight:800;font-size:calc(17px * var(--font-scale));line-height:1.2;display:block;margin-bottom:3px}
+.cmd-item .cmd-sub{font-size:calc(13px * var(--font-scale));color:var(--t2);line-height:1.35;display:block}
 .cmd-item .cmd-arrow{flex-shrink:0;color:var(--t3);display:flex}
 .cmd-item .cmd-arrow svg{width:22px;height:22px}
-
-/* ═══════════════════════════════════════════════════════════════
-   КНОПКА «НАВЕРХ» И ФУТЕР
-   ═══════════════════════════════════════════════════════════════ */
-.scroll-top{
-  position:fixed;right:16px;
-  bottom:calc(var(--nav-h) + var(--safe-bot) + 16px);
-  width:56px;height:56px;border-radius:50%;
-  background:var(--gold);color:#0a0906;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 6px 20px rgba(0,0,0,.30);
-  z-index:45;border:none;
-  opacity:0;pointer-events:none;
-  transition:opacity .25s var(--ease),transform .15s var(--ease);
-}
+.scroll-top{position:fixed;right:16px;bottom:calc(var(--nav-h) + var(--safe-bot) + 16px);width:56px;height:56px;border-radius:50%;background:var(--gold);color:#0a0906;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.30);z-index:45;border:none;opacity:0;pointer-events:none;transition:opacity .25s var(--ease),transform .15s var(--ease)}
 .scroll-top.on{opacity:1;pointer-events:auto}
 .scroll-top:active{transform:scale(.9)}
 .scroll-top svg{width:26px;height:26px}
-
-.foot{
-  text-align:center;
-  padding:20px 16px calc(var(--nav-h) + var(--safe-bot) + 24px);
-  font-family:var(--fm);font-size:calc(12px * var(--font-scale));
-  color:var(--t3);line-height:1.85;
-  border-top:1px solid var(--line);margin-top:24px;
-}
-.foot .disc{
-  max-width:640px;margin:0 auto 14px;
-  padding:16px 20px;background:var(--bg2);
-  border-left:5px solid var(--or);
-  border-radius:0 var(--rs) var(--rs) 0;
-  text-align:left;font-family:var(--f);
-  font-size:calc(14px * var(--font-scale));
-  color:var(--t2);line-height:1.6;
-}
+.foot{text-align:center;padding:20px 16px calc(var(--nav-h) + var(--safe-bot) + 24px);font-family:var(--fm);font-size:calc(12px * var(--font-scale));color:var(--t3);line-height:1.85;border-top:1px solid var(--line);margin-top:24px}
+.foot .disc{max-width:640px;margin:0 auto 14px;padding:16px 20px;background:var(--bg2);border-left:5px solid var(--or);border-radius:0 var(--rs) var(--rs) 0;text-align:left;font-family:var(--f);font-size:calc(14px * var(--font-scale));color:var(--t2);line-height:1.6}
 .foot .disc strong{color:var(--t0)}
-
 .hidden{display:none!important}
-
-/* ═══════════════════════════════════════════════════════════════
-   ДОСТУПНОСТЬ
-   ═══════════════════════════════════════════════════════════════ */
 @media (prefers-contrast: more){
-  :root{
-    --t0:#ffffff;--t1:#f0ecd8;--t2:#c8c0a8;--t3:#a09880;
-    --line:#4a4538;--line2:#6a6455;--line3:#8a8268;
-  }
-  [data-theme="light"]{
-    --t0:#000000;--t1:#1a1408;--t2:#3a3428;--t3:#5a5240;
-    --line:#a89c80;--line2:#8a8268;--line3:#6a6455;
-  }
+  :root{--t0:#ffffff;--t1:#f0ecd8;--t2:#c8c0a8;--t3:#a09880;--line:#4a4538;--line2:#6a6455;--line3:#8a8268}
+  [data-theme="light"]{--t0:#000000;--t1:#1a1408;--t2:#3a3428;--t3:#5a5240;--line:#a89c80;--line2:#8a8268;--line3:#6a6455}
 }
 @media (prefers-reduced-motion: reduce){
-  *,*::before,*::after{
-    animation-duration:.01ms!important;
-    transition-duration:.01ms!important;
-    scroll-behavior:auto!important;
-  }
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   ПЕЧАТЬ
-   ═══════════════════════════════════════════════════════════════ */
 @media print{
   @page{size:A4;margin:14mm 10mm}
-  :root{
-    --bg:#fff;--bg2:#fff;--bg3:#f4f4f4;--t0:#000;--t1:#222;--t2:#555;--t3:#888;
-    --line:#ccc;--line2:#aaa;--line3:#888;--gold:#8a6a20;--red:#c00;--red2:#900;
-    --red-deep:#600;--gr:#060;--bl:#036;--or:#a60;
-    --red-dim:#ffecec;--gr-dim:#ecf7ec;--bl-dim:#eef4fb;--or-dim:#fff3e0;
-    --cy:#0a6;--cy-dim:#e6f5f1;
-  }
+  :root{--bg:#fff;--bg2:#fff;--bg3:#f4f4f4;--t0:#000;--t1:#222;--t2:#555;--t3:#888;--line:#ccc;--line2:#aaa;--line3:#888;--gold:#8a6a20;--red:#c00;--red2:#900;--red-deep:#600;--gr:#060;--bl:#036;--or:#a60;--red-dim:#ffecec;--gr-dim:#ecf7ec;--bl-dim:#eef4fb;--or-dim:#fff3e0;--cy:#0a6;--cy-dim:#e6f5f1}
   html,body{background:#fff!important;color:#000!important;overflow:visible;height:auto}
   .app{max-width:none;min-height:0;display:block}
-  .header,.bottom-nav,.foot,.action-btn,.detail-actions,.metronome-panel,
-  .progress-bar,.filter-bar,.btn-with-lbl,.back-btn,.sos-big,.call-row,
-  .seizure-timer,.crumbs,.star-btn,.cmd-panel,.scroll-top,.share-row{display:none!important}
+  .header,.bottom-nav,.foot,.action-btn,.detail-actions,.metronome-panel,.progress-bar,.filter-bar,.btn-with-lbl,.back-btn,.sos-big,.call-row,.seizure-timer,.crumbs,.star-btn,.cmd-panel,.scroll-top{display:none!important}
   main{padding:0}
   .page{display:none!important}
   .page.on{display:block!important}
   body{font-size:11pt;line-height:1.45}
-  .card,.step,.doc,.warning-block,.note-block,.check-card{
-    page-break-inside:avoid;
-    background:#fff;color:#000;
-    border:1px solid #999;border-left-width:6px;
-    box-shadow:none;padding:10px 14px;margin-bottom:8px;
-  }
+  .card,.step,.doc,.warning-block,.note-block,.check-card{page-break-inside:avoid;background:#fff;color:#000;border:1px solid #999;border-left-width:6px;box-shadow:none;padding:10px 14px;margin-bottom:8px}
   .grid{grid-template-columns:repeat(3,1fr);gap:6px}
   .card{min-height:auto;padding:8px 10px}
   .card .ic svg{width:24px;height:24px}
@@ -927,7 +384,6 @@ main{
 <body>
 
 <div class="app" id="app">
-
 <header class="header">
   <button class="back-btn" id="backBtn" data-act="back" aria-label="Назад" type="button">
     <span data-icon="arrow-left" data-size="22"></span>
@@ -941,11 +397,11 @@ main{
     </div>
   </div>
   <div class="acts">
-    <button class="btn-with-lbl" data-act="open-commands" type="button" aria-label="Меню команд" title="Меню">
+    <button class="btn-with-lbl" data-act="open-commands" type="button" aria-label="Меню команд">
       <span data-icon="grid" data-size="22"></span>
       <span class="btn-lbl">Меню</span>
     </button>
-    <button class="btn-with-lbl" data-act="theme" id="themeBtn" type="button" aria-label="Сменить тему" title="Тема">
+    <button class="btn-with-lbl" data-act="theme" id="themeBtn" type="button" aria-label="Сменить тему">
       <span class="icon-slot" id="themeIcon" data-icon="moon" data-size="22"></span>
       <span class="btn-lbl">Тема</span>
     </button>
@@ -958,34 +414,24 @@ main{
 </div>
 
 <main id="main">
-
-<section class="page on" id="p-home" data-title="Экстренная помощь">
-
-  <button class="sos-big" data-act="open" data-id="cpr" aria-label="Человек не дышит — открыть алгоритм" type="button">
+<section class="page on" id="p-home">
+  <button class="sos-big" data-act="open" data-id="cpr" type="button">
     <span class="ic" aria-hidden="true"><span data-icon="heart-crack" data-size="52"></span></span>
     <span class="txt">
       <span class="lbl">Человек не дышит?</span>
       <span class="hint">Нажми сюда → научим качать сердце</span>
     </span>
   </button>
-
   <div class="call-row">
     <a class="call-btn uni" href="tel:112" aria-label="Позвонить 112">
       <span class="ic" aria-hidden="true"><span data-icon="phone" data-size="34"></span></span>
-      <span>
-        <span class="num">112</span>
-        <span class="lbl">Скорая<small>Везде. Без SIM и денег</small></span>
-      </span>
+      <span><span class="num">112</span><span class="lbl">Скорая<small>Везде. Без SIM и денег</small></span></span>
     </a>
     <a class="call-btn amb" href="tel:103" aria-label="Позвонить 103">
       <span class="ic" aria-hidden="true"><span data-icon="phone" data-size="34"></span></span>
-      <span>
-        <span class="num">103</span>
-        <span class="lbl">Скорая<small>Прямой номер</small></span>
-      </span>
+      <span><span class="num">103</span><span class="lbl">Скорая<small>Прямой номер</small></span></span>
     </a>
   </div>
-
   <div class="quick-hero">
     <div class="t"><span data-icon="alert-circle" data-size="16"></span>Если человек упал и не отвечает</div>
     <ol>
@@ -995,36 +441,17 @@ main{
       <li><strong>Дышит</strong> → положи на бок. <strong>Не дышит</strong> → качай сердце и звони 112.</li>
     </ol>
   </div>
-
-  <div class="share-row">
-    <button type="button" class="action-btn ghost" data-act="share" aria-label="Поделиться приложением">
-      <span data-icon="share" data-size="22"></span>Поделиться
-    </button>
-    <button type="button" class="action-btn ghost" data-act="save" aria-label="Сохранить как файл">
-      <span data-icon="download" data-size="22"></span>Сохранить файл
-    </button>
+  <div class="filter-bar" role="tablist" aria-label="Фильтр">
+    <button class="chip on" data-act="filter" data-cat="all" role="tab" aria-selected="true" type="button"><span data-icon="grid" data-size="18"></span>Все</button>
+    <button class="chip crit" data-act="filter" data-cat="crit" role="tab" aria-selected="false" type="button"><span data-icon="alert-triangle" data-size="18"></span>Срочно</button>
+    <button class="chip warn" data-act="filter" data-cat="warn" role="tab" aria-selected="false" type="button"><span data-icon="alert-circle" data-size="18"></span>Важно</button>
+    <button class="chip fav" data-act="filter" data-cat="fav" role="tab" aria-selected="false" type="button"><span data-icon="star-filled" data-size="18"></span>Избранное</button>
   </div>
-
-  <div class="filter-bar" role="tablist" aria-label="Фильтр состояний">
-    <button class="chip on" data-act="filter" data-cat="all" role="tab" aria-selected="true" type="button">
-      <span data-icon="grid" data-size="18"></span>Все
-    </button>
-    <button class="chip crit" data-act="filter" data-cat="crit" role="tab" aria-selected="false" type="button">
-      <span data-icon="alert-triangle" data-size="18"></span>Срочно
-    </button>
-    <button class="chip warn" data-act="filter" data-cat="warn" role="tab" aria-selected="false" type="button">
-      <span data-icon="alert-circle" data-size="18"></span>Важно
-    </button>
-    <button class="chip fav" data-act="filter" data-cat="fav" role="tab" aria-selected="false" type="button">
-      <span data-icon="star-filled" data-size="18"></span>Избранное
-    </button>
-  </div>
-
   <div class="grid-title" id="gridTitle">Все состояния</div>
   <div class="grid" id="cardsGrid" role="list"></div>
 </section>
 
-<section class="page" id="p-detail" data-title="—">
+<section class="page" id="p-detail">
   <div class="detail-head">
     <div class="detail-ic" id="det-ic" aria-hidden="true"></div>
     <div class="detail-t">
@@ -1032,7 +459,6 @@ main{
       <div class="sub" id="det-sub">—</div>
     </div>
   </div>
-
   <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar">
     <div class="row">
       <span>Сделано</span>
@@ -1040,37 +466,29 @@ main{
       <span class="pct" id="progressPct">0%</span>
     </div>
   </div>
-
   <div class="detail-actions">
     <button class="action-btn primary" data-act="voice" id="voiceBtn" type="button">
       <span data-icon="volume" data-size="22"></span>Читать вслух
     </button>
-    <a class="action-btn danger" href="tel:112">
-      <span data-icon="phone" data-size="22"></span>112
-    </a>
-    <button class="action-btn ghost" data-act="back" type="button">
-      <span data-icon="arrow-left" data-size="22"></span>Назад
-    </button>
+    <a class="action-btn danger" href="tel:112"><span data-icon="phone" data-size="22"></span>112</a>
+    <button class="action-btn ghost" data-act="back" type="button"><span data-icon="arrow-left" data-size="22"></span>Назад</button>
   </div>
-
   <div id="seizureSlot"></div>
   <div id="metronomeSlot"></div>
   <div id="det-content"></div>
 </section>
 
-<section class="page" id="p-call" data-title="Как вызвать скорую">
+<section class="page" id="p-call">
   <div class="doc">
     <h2>Как правильно вызвать скорую</h2>
     <p>От того, что ты скажешь диспетчеру, зависит, как быстро приедет бригада. Говори коротко, по порядку. Не отключайся первым — диспетчер может подсказать, что делать до приезда.</p>
-
     <h3>Что сказать в первую очередь</h3>
     <ol>
-      <li><strong>Адрес.</strong> Улица, дом, подъезд, этаж, квартира. Код домофона. Если не знаешь — назови ориентир.</li>
-      <li><strong>Что случилось.</strong> «Человек без сознания, не дышит». «Боль в груди, давит». «Кровь из ноги».</li>
+      <li><strong>Адрес.</strong> Улица, дом, подъезд, этаж, квартира. Код домофона.</li>
+      <li><strong>Что случилось.</strong> «Человек без сознания, не дышит». «Боль в груди, давит».</li>
       <li><strong>Кто пострадавший.</strong> Возраст, пол. Если ребёнок — сколько лет.</li>
       <li><strong>Кто ты и телефон.</strong> Назовись. Дай номер, чтобы перезвонить.</li>
     </ol>
-
     <h3>Чего не делать</h3>
     <ul>
       <li>Не кричать в трубку. Отвечай по одному вопросу.</li>
@@ -1078,7 +496,6 @@ main{
       <li>Не преувеличивать и не преуменьшать.</li>
       <li>Не спорить с диспетчером.</li>
     </ul>
-
     <h3>Пока едет скорая</h3>
     <ul>
       <li>Открой дверь в подъезд. Или попроси соседа встретить.</li>
@@ -1088,25 +505,21 @@ main{
       <li>Собери лекарства, которые человек принимает постоянно.</li>
       <li>Не давай ни еды, ни питья, если не написано иначе.</li>
     </ul>
-
     <div class="callout warn"><strong>Если без сознания, но дышит</strong> — поверни на бок и не оставляй одного.</div>
     <div class="callout danger"><strong>Если не дышит</strong> — не жди скорую. Качай сердце. Каждая минута — минус 10% шансов.</div>
   </div>
 </section>
 
-<section class="page" id="p-legal" data-title="Юридическая справка">
+<section class="page" id="p-legal">
   <div class="doc">
     <h2>Юридическая справка</h2>
     <p>Ты можешь помочь и не бояться. В России первая помощь — это не медицинская деятельность. Её может оказывать любой человек без специального образования.</p>
-
     <h3>Что говорит закон</h3>
-    <p><strong>Статья 31 ФЗ № 323-ФЗ от 21.11.2011</strong> — первая помощь не является медицинской. Её могут оказывать люди без медицинского образования.</p>
+    <p><strong>Статья 31 ФЗ № 323-ФЗ от 21.11.2011</strong> — первая помощь не является медицинской.</p>
     <p><strong>Статья 39 УК РФ «Крайняя необходимость»</strong> — причинение вреда для устранения опасности жизни не является преступлением.</p>
     <p><strong>Статья 125 УК РФ «Оставление в опасности»</strong> — если обязан был помочь и мог, но оставил — это преступление.</p>
-
     <h3>Приказ Минздрава РФ</h3>
-    <p><strong>Приказ № 220н от 03.05.2024</strong> утверждает порядок оказания первой помощи. Все алгоритмы в этом приложении составлены по этому приказу.</p>
-
+    <p><strong>Приказ № 220н от 03.05.2024</strong> утверждает порядок оказания первой помощи.</p>
     <h3>Что защищает тебя</h3>
     <ul>
       <li><strong>Добросовестность.</strong> Действовал в интересах пострадавшего — закон на твоей стороне.</li>
@@ -1114,92 +527,63 @@ main{
       <li><strong>Согласие предполагается</strong>, если человек без сознания.</li>
       <li><strong>Отказ.</strong> Если в сознании и отказывается — не помогай силой.</li>
     </ul>
-
     <h3>Что не защищено</h3>
     <ul>
       <li>Оставление в опасности, если мог помочь.</li>
       <li>Действия, заведомо опасные для человека.</li>
       <li>Отказ в помощи тому, кто зависит от тебя.</li>
     </ul>
-
     <div class="callout good"><strong>Проще говоря.</strong> Ты не врач и не должен им быть. Ты — человек, который оказался рядом.</div>
-
     <h3>Лицензия</h3>
     <p>Этот файл — публичное достояние (CC0). Копируй, печатай, отправляй, публикуй любым способом.</p>
-
     <h3>Ограничение</h3>
-    <p>Этот материал не заменяет обучение первой помощи. Для точных навыков пройди курс — их проводят МЧС, Красный Крест, учебные центры.</p>
+    <p>Этот материал не заменяет обучение первой помощи.</p>
   </div>
 </section>
 
-<section class="page" id="p-settings" data-title="Настройки">
+<section class="page" id="p-settings">
   <div class="doc">
     <h2>Настройки</h2>
     <p>Сохраняются в браузере. Никуда не отправляются.</p>
-
     <h3>Оформление</h3>
     <div class="setting-row">
-      <div>
-        <div class="lbl">Тема</div>
-        <div class="sub">Тёмная — для ночи, светлая — для дня</div>
-      </div>
+      <div><div class="lbl">Тема</div><div class="sub">Тёмная — для ночи, светлая — для дня</div></div>
       <div class="ctrl" data-setting="theme" role="group" aria-label="Тема">
         <button data-val="dark" type="button">Тёмная</button>
         <button data-val="light" type="button">Светлая</button>
         <button data-val="auto" type="button">Авто</button>
       </div>
     </div>
-
     <div class="setting-row">
-      <div>
-        <div class="lbl">Размер шрифта</div>
-        <div class="sub">Увеличь, если текст мелкий</div>
-      </div>
+      <div><div class="lbl">Размер шрифта</div><div class="sub">Увеличь, если текст мелкий</div></div>
       <div class="ctrl" data-setting="font" role="group" aria-label="Размер шрифта">
         <button data-val="normal" type="button">А</button>
         <button data-val="large" type="button">А+</button>
         <button data-val="xlarge" type="button">А++</button>
       </div>
     </div>
-
     <h3>Сердце</h3>
     <div class="setting-row">
-      <div>
-        <div class="lbl">Метроном</div>
-        <div class="sub">Звук 110 ударов в минуту — правильный темп</div>
-      </div>
+      <div><div class="lbl">Метроном</div><div class="sub">Звук 110 ударов в минуту</div></div>
       <div class="ctrl" data-setting="metronome" role="group" aria-label="Метроном">
         <button data-val="on" type="button">Вкл</button>
         <button data-val="off" type="button">Выкл</button>
       </div>
     </div>
-
     <h3>О приложении</h3>
-    <div class="setting-row">
-      <div><div class="lbl">Версия</div><div class="sub">urn:vanxo:artifact:emergency-help:2.5.0</div></div>
-    </div>
-    <div class="setting-row">
-      <div><div class="lbl">Лицензия</div><div class="sub">CC0 · Public Domain</div></div>
-    </div>
-    <div class="setting-row">
-      <div><div class="lbl">Соответствие</div><div class="sub">Приказ Минздрава РФ № 220н от 03.05.2024</div></div>
-    </div>
-    <div class="setting-row">
-      <div><div class="lbl">Установка</div><div class="sub">Можно добавить на главный экран как приложение</div></div>
-    </div>
+    <div class="setting-row"><div><div class="lbl">Версия</div><div class="sub">urn:vanxo:artifact:emergency-help:2.5.0</div></div></div>
+    <div class="setting-row"><div><div class="lbl">Лицензия</div><div class="sub">CC0 · Public Domain</div></div></div>
+    <div class="setting-row"><div><div class="lbl">Соответствие</div><div class="sub">Приказ Минздрава РФ № 220н от 03.05.2024</div></div></div>
+    <div class="setting-row"><div><div class="lbl">Установка</div><div class="sub">Можно добавить на главный экран как приложение</div></div></div>
   </div>
 </section>
-
 </main>
 
 <footer class="foot" id="footer">
-  <div class="disc">
-    <strong>Это не замена врачу.</strong> Материал информационный. Все действия — на твоё усмотрение. Алгоритмы — по приказу Минздрава России № 220н от 03.05.2024 и материалам МЧС.
-  </div>
+  <div class="disc"><strong>Это не замена врачу.</strong> Материал информационный. Все действия — на твоё усмотрение. Алгоритмы — по приказу Минздрава России № 220н от 03.05.2024 и материалам МЧС.</div>
   <div>urn:vanxo:artifact:emergency-help:2.5.0 · CC0 · Public Domain</div>
   <div>Копируй, печатай, отправляй — свободно</div>
 </footer>
-
 </div>
 
 <nav class="bottom-nav" id="bottomNav" aria-label="Основная навигация">
@@ -1234,94 +618,59 @@ main{
         <span data-icon="x" data-size="24"></span>
       </button>
     </div>
-
     <div class="cmd-section">Позвонить сейчас</div>
     <a class="cmd-item danger" href="tel:112" data-act="close-commands">
       <span class="cmd-ic"><span data-icon="phone" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Позвонить 112</span>
-        <span class="cmd-sub">Работает везде. Без SIM и денег</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Позвонить 112</span><span class="cmd-sub">Работает везде. Без SIM и денег</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </a>
     <a class="cmd-item" href="tel:103" data-act="close-commands">
       <span class="cmd-ic"><span data-icon="phone" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Позвонить 103</span>
-        <span class="cmd-sub">Прямой номер скорой</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Позвонить 103</span><span class="cmd-sub">Прямой номер скорой</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </a>
-
     <div class="cmd-section">Поделиться с другими</div>
     <button class="cmd-item" data-act="share" type="button">
       <span class="cmd-ic"><span data-icon="share" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Поделиться</span>
-        <span class="cmd-sub">Ссылка в WhatsApp, Telegram, СМС</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Скопировать ссылку</span><span class="cmd-sub">stomvrn.github.io/emergency-help</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </button>
     <button class="cmd-item" data-act="save" type="button">
       <span class="cmd-ic"><span data-icon="download" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Сохранить файл</span>
-        <span class="cmd-sub">Передать по Bluetooth или в мессенджере</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Сохранить файл</span><span class="cmd-sub">Передать по Bluetooth или в мессенджере</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </button>
-
     <div class="cmd-section">Что сказать диспетчеру</div>
     <button class="cmd-item" data-act="goto" data-to="p-call" type="button">
       <span class="cmd-ic"><span data-icon="alert-circle" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Готовые фразы</span>
-        <span class="cmd-sub">Адрес · что случилось · кто пострадал · твой телефон</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Готовые фразы</span><span class="cmd-sub">Адрес · что случилось · кто пострадал</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </button>
-
     <div class="cmd-section">Разделы</div>
     <button class="cmd-item primary" data-act="goto" data-to="p-home" type="button">
       <span class="cmd-ic"><span data-icon="home" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Главная</span>
-        <span class="cmd-sub">Все состояния и алгоритмы</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Главная</span><span class="cmd-sub">Все состояния и алгоритмы</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </button>
     <button class="cmd-item" data-act="goto" data-to="p-legal" type="button">
       <span class="cmd-ic"><span data-icon="scale" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Закон о помощи</span>
-        <span class="cmd-sub">Ты имеешь право помогать</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Закон о помощи</span><span class="cmd-sub">Ты имеешь право помогать</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </button>
     <button class="cmd-item" data-act="goto" data-to="p-settings" type="button">
       <span class="cmd-ic"><span data-icon="settings" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Настройки</span>
-        <span class="cmd-sub">Тема, шрифт, метроном</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Настройки</span><span class="cmd-sub">Тема, шрифт, метроном</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </button>
-
     <div class="cmd-section">Ещё</div>
     <button class="cmd-item" data-act="theme" type="button">
       <span class="cmd-ic"><span data-icon="moon" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Сменить тему</span>
-        <span class="cmd-sub">Тёмная / светлая / авто</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Сменить тему</span><span class="cmd-sub">Тёмная / светлая / авто</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </button>
     <button class="cmd-item" data-act="print" type="button">
       <span class="cmd-ic"><span data-icon="printer" data-size="26"></span></span>
-      <span class="cmd-body">
-        <span class="cmd-lbl">Распечатать</span>
-        <span class="cmd-sub">Текущую страницу — на бумагу</span>
-      </span>
+      <span class="cmd-body"><span class="cmd-lbl">Распечатать</span><span class="cmd-sub">Текущую страницу — на бумагу</span></span>
       <span class="cmd-arrow"><span data-icon="chevron-right" data-size="22"></span></span>
     </button>
   </div>
@@ -1331,19 +680,16 @@ main{
 "use strict";
 (function(){
 
-/* ═══════════════════════════════════════════════════════════════
-   ИКОНКИ
-   ═══════════════════════════════════════════════════════════════ */
+var CANONICAL_URL = 'https://stomvrn.github.io/emergency-help/';
+
 var ICONS = {
   'heart-crack':'<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><path d="M12 8l-1.5 2.5 3 1-1.5 2.5"/>',
-  'heart-pulse':'<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><polyline points="3.5 12.5 7.5 12.5 9.5 9 12 15 14.5 12.5 20.5 12.5"/>',
   'heart-zap':'<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><polyline points="13 6 10.5 11.5 13.5 11.5 11 17" fill="none"/>',
   'brain':'<path d="M9.5 2A2.5 2.5 0 0 0 7 4.5v.5A2.5 2.5 0 0 0 4.5 7.5 2.5 2.5 0 0 0 3 10a2.5 2.5 0 0 0 1.5 2.5A2.5 2.5 0 0 0 4.5 15 2.5 2.5 0 0 0 7 17.5v.5a2.5 2.5 0 0 0 5 0V4.5A2.5 2.5 0 0 0 9.5 2z"/><path d="M14.5 2A2.5 2.5 0 0 1 17 4.5v.5a2.5 2.5 0 0 1 2.5 2.5A2.5 2.5 0 0 1 21 10a2.5 2.5 0 0 1-1.5 2.5A2.5 2.5 0 0 1 19.5 15 2.5 2.5 0 0 1 17 17.5v.5a2.5 2.5 0 0 1-5 0V4.5A2.5 2.5 0 0 1 14.5 2z"/>',
   'droplet':'<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
   'skull':'<path d="M12 2a7 7 0 0 0-7 7v4l1.5 1.5V18a1 1 0 0 0 1 1h2v2h1v-2h1v2h1v-2h1v2h1v-2h2a1 1 0 0 0 1-1v-3.5L18.5 13V9a7 7 0 0 0-7-7z"/><circle cx="9.5" cy="11" r="1.4" fill="currentColor" stroke="none"/><circle cx="14.5" cy="11" r="1.4" fill="currentColor" stroke="none"/><path d="M12 15l-1 2h2z" fill="currentColor" stroke="none"/>',
   'bee':'<ellipse cx="12" cy="14" rx="5" ry="6"/><path d="M7 12c-1.7 0-3.4.8-4 2M17 12c1.7 0 3.4.8 4 2"/><path d="M7 16c-1.5 0-3 .7-3.6 1.8M17 16c1.5 0 3 .7 3.6 1.8"/><path d="M9.5 6.5V4.5M14.5 6.5V4.5"/><circle cx="9.5" cy="4" r="1.2" fill="currentColor" stroke="none"/><circle cx="14.5" cy="4" r="1.2" fill="currentColor" stroke="none"/>',
   'user-down':'<circle cx="12" cy="6" r="3"/><path d="M3 20h18"/><path d="M6 16l6-2 6 2"/>',
-  'user-x':'<circle cx="10" cy="7" r="4"/><path d="M2 21v-2a4 4 0 0 1 4-4h4"/><line x1="16" y1="14" x2="22" y2="20"/><line x1="22" y1="14" x2="16" y2="20"/>',
   'alert-triangle':'<path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
   'alert-circle':'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
   'baby':'<circle cx="12" cy="10" r="5"/><path d="M9 20l.5-3M15 20l-.5-3"/><circle cx="10" cy="9" r=".6" fill="currentColor" stroke="none"/><circle cx="14" cy="9" r=".6" fill="currentColor" stroke="none"/><path d="M10.5 11.5s.7.5 1.5.5 1.5-.5 1.5-.5"/>',
@@ -1378,28 +724,19 @@ var ICONS = {
 };
 
 function svg(name, size){
-  var sz = (size || 24);
+  var sz = size || 24;
   var p = ICONS[name] || ICONS['alert-circle'];
-  return '<svg xmlns="http://www.w3.org/2000/svg" width="' + sz + '" height="' + sz + '" ' +
-    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
-    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + p + '</svg>';
+  return '<svg xmlns="http://www.w3.org/2000/svg" width="'+sz+'" height="'+sz+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">'+p+'</svg>';
 }
-
 function fillIcons(){
   var els = document.querySelectorAll('[data-icon]');
-  for(var i = 0; i < els.length; i++){
+  for(var i=0;i<els.length;i++){
     var el = els[i];
     if(el.dataset.iconFilled === '1') continue;
-    var name = el.getAttribute('data-icon');
-    var size = parseInt(el.getAttribute('data-size') || '24', 10);
-    el.innerHTML = svg(name, size);
+    el.innerHTML = svg(el.getAttribute('data-icon'), parseInt(el.getAttribute('data-size')||'24',10));
     el.dataset.iconFilled = '1';
   }
 }
-
-/* ═══════════════════════════════════════════════════════════════
-   UTILS
-   ═══════════════════════════════════════════════════════════════ */
 function $(id){ return document.getElementById(id); }
 function $$(s, r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
 function esc(s){
@@ -1410,22 +747,14 @@ function esc(s){
   });
 }
 function isMobileDevice(){
-  var ua = navigator.userAgent || '';
-  return /Android|iPhone|iPad|iPod|Mobile|Opera Mini/i.test(ua);
+  return /Android|iPhone|iPad|iPod|Mobile|Opera Mini/i.test(navigator.userAgent || '');
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ДАННЫЕ — АЛГОРИТМЫ
-   ═══════════════════════════════════════════════════════════════ */
 var CONDITIONS = [
-  {
-    id:'cpr', icon:'heart-crack',
-    name:'Человек не дышит',
-    hint:'Качать сердце',
+  { id:'cpr', icon:'heart-crack', name:'Человек не дышит', hint:'Качать сердце',
     category:'crit-deep', filter:'crit',
     title:'Человек не дышит — качай сердце',
     sub:'Не реагирует, грудь не двигается. Это клиническая смерть — счёт на секунды.',
-    keywords:['не дышит','без сознания','сердце','слр','остановка','реанимация'],
     metronome:true,
     steps:[
       {n:1,t:'Громко позови скорую',d:'Звони 112 или 103. Скажи: «Человек не дышит, качаю сердце». Включи громкую связь — диспетчер подскажет.',crit:true},
@@ -1443,14 +772,10 @@ var CONDITIONS = [
     ],
     note:'Каждая минута без массажа снижает шанс выжить на 10%. Через 10 минут шансов почти нет. Для детей до года — двумя пальцами, глубина 1/3 груди. С 1 до 8 лет — одной ладонью.'
   },
-  {
-    id:'unconscious-breathing', icon:'user-down',
-    name:'Без сознания, дышит',
-    hint:'Положить на бок',
+  { id:'unconscious-breathing', icon:'user-down', name:'Без сознания, дышит', hint:'Положить на бок',
     category:'crit', filter:'crit',
     title:'Без сознания, но дышит',
     sub:'Не отвечает, но грудь поднимается — дыхание есть.',
-    keywords:['обморок','упал','не отвечает','дышит','бок'],
     steps:[
       {n:1,t:'Проверь дыхание',d:'Наклонись ухом ко рту. Смотри на грудь. Считай до 10.'},
       {n:2,t:'Звони 112 или 103',d:'Скажи: «Человек без сознания, дышит». Назови адрес.',crit:true},
@@ -1458,22 +783,13 @@ var CONDITIONS = [
       {n:4,t:'Расстегни воротник и ремень',d:'Освободи шею и грудь.'},
       {n:5,t:'Оставайся рядом',d:'Каждые 2 минуты проверяй дыхание. Если остановится — качай сердце.'}
     ],
-    warnings:[
-      'Не оставляй на спине — может задохнуться.',
-      'Не давай воду, еду, таблетки через рот.',
-      'Не клади подушку под голову.',
-      'Не уходи, даже если стало лучше.'
-    ],
+    warnings:['Не оставляй на спине — может задохнуться.','Не давай воду, еду, таблетки через рот.','Не клади подушку под голову.','Не уходи, даже если стало лучше.'],
     note:'Если человек пришёл в себя за минуту — всё равно предложи вызвать врача. Обморок может быть симптомом серьёзного.'
   },
-  {
-    id:'bleeding', icon:'droplet',
-    name:'Сильная кровь',
-    hint:'Кровь льётся',
+  { id:'bleeding', icon:'droplet', name:'Сильная кровь', hint:'Кровь льётся',
     category:'crit', filter:'crit',
     title:'Сильное кровотечение',
     sub:'Кровь льётся струёй или одежда пропитывается за секунды.',
-    keywords:['кровь','кровотечение','рана','порез','жгут'],
     steps:[
       {n:1,t:'Кричи «Помогите!» и звони 112',d:'Одновременно. Рядом может быть кто-то.',crit:true},
       {n:2,t:'Прижми рану рукой',d:'Через чистую ткань — футболку, полотенце. Прижми крепко. Держи 5–10 минут.',crit:true},
@@ -1482,22 +798,13 @@ var CONDITIONS = [
       {n:5,t:'Приподними руку или ногу',d:'Выше уровня сердца — меньше кровоток.'},
       {n:6,t:'Укутай человека',d:'Курткой, пледом. Не давай пить.'}
     ],
-    warnings:[
-      'Не промывай рану водой.',
-      'Не вытаскивай предметы из раны.',
-      'Не снимай жгут сам — снимут в больнице.',
-      'Не давай пить.'
-    ],
+    warnings:['Не промывай рану водой.','Не вытаскивай предметы из раны.','Не снимай жгут сам — снимут в больнице.','Не давай пить.'],
     note:'Опасная потеря крови: бледная кожа, холодный пот, слабость, спутанность. Теряет сознание — уложи ноги выше головы.'
   },
-  {
-    id:'stroke', icon:'brain',
-    name:'Инсульт (удар)',
-    hint:'Перекос лица, слабость',
+  { id:'stroke', icon:'brain', name:'Инсульт (удар)', hint:'Перекос лица, слабость',
     category:'crit-deep', filter:'crit',
     title:'Подозрение на инсульт',
     sub:'Один угол рта опущен, одна рука слабее, речь невнятная.',
-    keywords:['инсульт','удар','перекос','улыбка','рука','речь','лицо'],
     steps:[
       {n:1,t:'Проверь три признака',d:'Попроси улыбнуться — угол рта опущен? Поднять обе руки — одна опускается? Назвать себя — путает слова?',crit:true},
       {n:2,t:'Есть признак — звони 112',d:'Скажи: «Подозрение на инсульт. Симптомы с …». Назови время.',crit:true},
@@ -1506,22 +813,13 @@ var CONDITIONS = [
       {n:5,t:'Ничего через рот',d:'Ни еды, ни питья, ни таблеток.',crit:true},
       {n:6,t:'Не оставляй одного',d:'Если потеряет сознание — положи на бок.'}
     ],
-    warnings:[
-      'Не давай воду или пищу.',
-      'Не давай таблетки — даже аспирин.',
-      'Не позволяй идти.',
-      'Не вези на своей машине.'
-    ],
+    warnings:['Не давай воду или пищу.','Не давай таблетки — даже аспирин.','Не позволяй идти.','Не вези на своей машине.'],
     note:'У врачей есть 4,5 часа с начала симптомов, чтобы растворить тромб. Успеть в это окно — шанс восстановиться.'
   },
-  {
-    id:'heart-attack', icon:'heart-zap',
-    name:'Сердце (инфаркт)',
-    hint:'Давит в груди',
+  { id:'heart-attack', icon:'heart-zap', name:'Сердце (инфаркт)', hint:'Давит в груди',
     category:'crit-deep', filter:'crit',
     title:'Подозрение на инфаркт',
     sub:'Давит в груди, отдаёт в руку, шею, челюсть. Больше 15 минут.',
-    keywords:['сердце','инфаркт','грудь','давит','боль','рука','челюсть'],
     steps:[
       {n:1,t:'Немедленно звони 112',d:'Скажи: «Боль в груди, давит, не проходит».',crit:true},
       {n:2,t:'Уложи полусидя',d:'С приподнятой головой — сердцу легче.'},
@@ -1530,22 +828,13 @@ var CONDITIONS = [
       {n:5,t:'Полный покой',d:'Расстегни воротник. Открой окно.'},
       {n:6,t:'Будь готов качать сердце',d:'Если потеряет сознание и перестанет дышать.'}
     ],
-    warnings:[
-      'Не позволяй идти или садиться за руль.',
-      'Не давай нитроглицерин, если бледный, потеет, слабый.',
-      'Не оставляй одного в туалете.',
-      'Не игнорируй необычные симптомы.'
-    ],
+    warnings:['Не позволяй идти или садиться за руль.','Не давай нитроглицерин, если бледный, потеет, слабый.','Не оставляй одного в туалете.','Не игнорируй необычные симптомы.'],
     note:'У женщин и пожилых инфаркт может выглядеть необычно: тошнота, боль в животе, слабость — без боли в груди.'
   },
-  {
-    id:'choking-adult', icon:'alert-triangle',
-    name:'Подавился',
-    hint:'Не может говорить',
+  { id:'choking-adult', icon:'alert-triangle', name:'Подавился', hint:'Не может говорить',
     category:'crit', filter:'crit',
     title:'Подавился (взрослый)',
     sub:'Не может говорить, хватается за горло, кашель слабый.',
-    keywords:['подавился','застряло','кость','кашель','горло','геймлих'],
     steps:[
       {n:1,t:'Спроси: «Вы подавились?»',d:'Кивает — действуй. Может кашлять и говорить — не мешай.'},
       {n:2,t:'5 ударов между лопаток',d:'Наклони вперёд, ударь основанием ладони 5 раз. Сильно.'},
@@ -1553,22 +842,13 @@ var CONDITIONS = [
       {n:4,t:'Чередуй 5 и 5',d:'5 ударов — 5 приёмов — 5 ударов — 5 приёмов. Пока не выйдет.'},
       {n:5,t:'Потерял сознание — качай сердце',d:'Положи на пол и начинай массаж.',crit:true}
     ],
-    warnings:[
-      'Не бей по спине сидящего.',
-      'Не лезь пальцами в рот вслепую.',
-      'Не тряси человека.',
-      'Не оставляй одного.'
-    ],
+    warnings:['Не бей по спине сидящего.','Не лезь пальцами в рот вслепую.','Не тряси человека.','Не оставляй одного.'],
     note:'Кашляет — не мешай. Кашель в 10 раз эффективнее твоих ударов.'
   },
-  {
-    id:'choking-baby', icon:'baby',
-    name:'Малыш подавился',
-    hint:'До года',
+  { id:'choking-baby', icon:'baby', name:'Малыш подавился', hint:'До года',
     category:'crit', filter:'crit',
     title:'Подавился ребёнок до года',
     sub:'Кашляет, хрипит или не дышит после кормления или игры.',
-    keywords:['малыш','ребёнок','грудничок','подавился','игрушка','младенец'],
     steps:[
       {n:1,t:'Положи животом на руку',d:'Головой вниз, ниже попы. Сядь, рука на бедре.'},
       {n:2,t:'5 ударов между лопаток',d:'Основанием ладони, не сильно. Считай вслух.'},
@@ -1577,22 +857,13 @@ var CONDITIONS = [
       {n:5,t:'Чередуй 5 и 5',d:'5 ударов — 5 нажатий — 5 ударов — 5 нажатий. До выхода.'},
       {n:6,t:'Потерял сознание — качай сердце',d:'30 нажатий двумя пальцами + 2 вдоха в рот и нос малыша.',crit:true}
     ],
-    warnings:[
-      'Не тряси малыша — опасно для мозга.',
-      'Не лезь пальцами в рот вслепую.',
-      'Не держи головой вверх — предмет провалится.',
-      'Не оставляй одного.'
-    ],
+    warnings:['Не тряси малыша — опасно для мозга.','Не лезь пальцами в рот вслепую.','Не держи головой вверх — предмет провалится.','Не оставляй одного.'],
     note:'Для детей старше года — приёмы как у взрослых, но слабее.'
   },
-  {
-    id:'anaphylaxis', icon:'bee',
-    name:'Сильная аллергия',
-    hint:'Укус, отёк, задыхается',
+  { id:'anaphylaxis', icon:'bee', name:'Сильная аллергия', hint:'Укус, отёк, задыхается',
     category:'crit-deep', filter:'crit',
     title:'Анафилактический шок',
     sub:'После укуса, еды или лекарства — отёк лица, сыпь, трудно дышать.',
-    keywords:['аллергия','укус','пчела','оса','отёк','задыхается','адреналин'],
     steps:[
       {n:1,t:'Немедленно 112',d:'Скажи: «Анафилаксия. Трудно дышать».',crit:true},
       {n:2,t:'Адреналин в бедро',d:'Если есть автоинъектор (EpiPen) — коли в наружную часть бедра через одежду. Держи 3 секунды.',crit:true},
@@ -1601,22 +872,13 @@ var CONDITIONS = [
       {n:5,t:'Следи за дыханием',d:'Задыхается и теряет сознание — качай сердце.'},
       {n:6,t:'Не оставляй одного',d:'Даже если стало легче — реакция может вернуться через 10–30 минут.'}
     ],
-    warnings:[
-      'Не сажай и не ставь.',
-      'Не оставляй одного, даже если полегчало.',
-      'Не жди, что пройдёт само.',
-      'Не давай антигистаминные вместо адреналина.'
-    ],
+    warnings:['Не сажай и не ставь.','Не оставляй одного, даже если полегчало.','Не жди, что пройдёт само.','Не давай антигистаминные вместо адреналина.'],
     note:'Была когда-то реакция с отёком — у человека может быть автоинъектор. Обычно в сумке или на поясе.'
   },
-  {
-    id:'seizure', icon:'zap',
-    name:'Судороги',
-    hint:'Бьётся, дёргается',
+  { id:'seizure', icon:'zap', name:'Судороги', hint:'Бьётся, дёргается',
     category:'crit', filter:'crit',
     title:'Судорожный приступ',
     sub:'Упал, тело напряглось, руки-ноги дёргаются, может быть пена.',
-    keywords:['судороги','припадок','эпилепсия','дёргается','пена'],
     timer:true,
     steps:[
       {n:1,t:'Убери опасные предметы',d:'Отодвинь стулья, острые углы, горячее. Самого человека не трогай.'},
@@ -1626,22 +888,13 @@ var CONDITIONS = [
       {n:5,t:'Звони 112',d:'Если первый раз, больше 5 минут, повторился.'},
       {n:6,t:'Оставайся рядом',d:'После приступа 10–30 минут может быть в спутанном сознании.'}
     ],
-    warnings:[
-      'Не удерживай силой — сломаешь руку или ребро.',
-      'Не разжимай зубы.',
-      'Не вставляй ничего в рот.',
-      'Не лей воду в лицо.'
-    ],
+    warnings:['Не удерживай силой — сломаешь руку или ребро.','Не разжимай зубы.','Не вставляй ничего в рот.','Не лей воду в лицо.'],
     note:'Обычный приступ длится 1–3 минуты и проходит сам. Твоя задача — не дать разбиться и не задохнуться.'
   },
-  {
-    id:'burn', icon:'flame',
-    name:'Ожог',
-    hint:'Кипяток, огонь',
+  { id:'burn', icon:'flame', name:'Ожог', hint:'Кипяток, огонь',
     category:'warn', filter:'warn',
     title:'Ожог',
     sub:'Красная кожа, пузыри или обугленные участки.',
-    keywords:['ожог','кипяток','огонь','горячее','обжёгся','пламя','пузыри'],
     steps:[
       {n:1,t:'Лей прохладную воду 20 минут',d:'15–25 °C, не ледяную. Снимает боль и останавливает распространение.',crit:true},
       {n:2,t:'Сними кольца, часы, украшения',d:'Если начнётся отёк — потом не снимешь.'},
@@ -1650,22 +903,13 @@ var CONDITIONS = [
       {n:5,t:'Дышал горячим — звони 112',d:'Кашель, осиплость, обожжённые губы.',crit:true},
       {n:6,t:'Обезболивающее',d:'Если в сознании и нет аллергии — парацетамол или ибупрофен.'}
     ],
-    warnings:[
-      'Не мажь маслом, кремом, яйцом, зубной пастой.',
-      'Не прокалывай пузыри.',
-      'Не отрывай прилипшую одежду — срезай вокруг.',
-      'Не используй лёд.'
-    ],
+    warnings:['Не мажь маслом, кремом, яйцом, зубной пастой.','Не прокалывай пузыри.','Не отрывай прилипшую одежду — срезай вокруг.','Не используй лёд.'],
     note:'Глубокий ожог выглядит белым, восковым или обугленным. Может быть без боли. Это повод для скорой.'
   },
-  {
-    id:'poisoning', icon:'skull',
-    name:'Отравление',
-    hint:'Таблетки, газ, дым',
+  { id:'poisoning', icon:'skull', name:'Отравление', hint:'Таблетки, газ, дым',
     category:'warn', filter:'warn',
     title:'Отравление',
     sub:'Через рот, дыхание (дым, газ) или кожу.',
-    keywords:['отравление','таблетки','газ','дым','угарный','химия','выпил','передоз'],
     steps:[
       {n:1,t:'Определи путь отравления',d:'Через рот? Через дыхание? Через кожу? От этого зависят действия.',crit:true},
       {n:2,t:'Через рот — не всегда рвота',d:'Кислота, бензин, керосин, мыло — рвоту НЕ вызывай. Звони 112. Таблетки и меньше 30 минут — можно, если в сознании.',crit:true},
@@ -1674,22 +918,13 @@ var CONDITIONS = [
       {n:5,t:'Сохрани упаковку',d:'Бутылку, упаковку, таблетки — покажи врачу.'},
       {n:6,t:'На бок, если без сознания',d:'Чтобы не захлебнулся рвотой.'}
     ],
-    warnings:[
-      'Не давай молоко — миф.',
-      'Не вызывай рвоту при отравлении кислотами.',
-      'Не давай ничего через рот без сознания.',
-      'Не заходи в помещение с газом без защиты.'
-    ],
+    warnings:['Не давай молоко — миф.','Не вызывай рвоту при отравлении кислотами.','Не давай ничего через рот без сознания.','Не заходи в помещение с газом без защиты.'],
     note:'Угарный газ — частый убийца. Признаки: головная боль, слабость, тошнота, розовая кожа. Источник — печка, котёл, машина в гараже.'
   },
-  {
-    id:'hypoglycemia', icon:'candy',
-    name:'Упал сахар',
-    hint:'Диабетик, дрожит',
+  { id:'hypoglycemia', icon:'candy', name:'Упал сахар', hint:'Диабетик, дрожит',
     category:'warn', filter:'warn',
     title:'Низкий сахар (гипогликемия)',
     sub:'Диабетик дрожит, потеет, спутан, агрессивен.',
-    keywords:['сахар','диабет','дрожит','сладкое','глюкоза'],
     steps:[
       {n:1,t:'В сознании — дай сладкое',d:'Сахар, конфета, мёд, сладкий чай, сок, таблетки глюкозы.',crit:true},
       {n:2,t:'Без сознания — ничего через рот',d:'Подавится. Звони 112.',crit:true},
@@ -1697,22 +932,13 @@ var CONDITIONS = [
       {n:4,t:'После — сложные углеводы',d:'Хлеб, каша, картофель. Чтобы сахар держался.'},
       {n:5,t:'Не оставляй одного',d:'Сахар может упасть снова.'}
     ],
-    warnings:[
-      'Не вливай сладкое в рот без сознания.',
-      'Не давай сахарозаменитель.',
-      'Не путай с высоким сахаром — там сладкое НЕ дают.',
-      'Не оставляй одного.'
-    ],
+    warnings:['Не вливай сладкое в рот без сознания.','Не давай сахарозаменитель.','Не путай с высоким сахаром — там сладкое НЕ дают.','Не оставляй одного.'],
     note:'Отличия от высокого сахара. Низкий: дрожь, холодный пот, голод, агрессия. Высокий: сонливость, жажда, запах ацетона. Не уверен — считай низкий и дай сахар, если в сознании.'
   },
-  {
-    id:'frostbite', icon:'snowflake',
-    name:'Обморожение',
-    hint:'Мороз, белая кожа',
+  { id:'frostbite', icon:'snowflake', name:'Обморожение', hint:'Мороз, белая кожа',
     category:'warn', filter:'warn',
     title:'Обморожение',
     sub:'Кожа белая или серо-синяя, онемела, твёрдая.',
-    keywords:['мороз','холод','обморожение','белый','зима','замёрз'],
     steps:[
       {n:1,t:'Заведи в тёплое помещение',d:'Не растирай на улице и не отогревай на морозе.'},
       {n:2,t:'Сними мокрую одежду',d:'Осторожно. Ткань примерзла — не отрывай.'},
@@ -1721,22 +947,13 @@ var CONDITIONS = [
       {n:5,t:'Сухая повязка',d:'На отмороженный участок. Не растирай, не массируй.'},
       {n:6,t:'Звони 112',d:'Кожа тёмная, твёрдая, потеря чувствительности. Если у ребёнка или пожилого.',crit:true}
     ],
-    warnings:[
-      'Не растирай снегом — снег режет кожу.',
-      'Не мажь жиром и маслом.',
-      'Не отогревай в горячей воде.',
-      'Не давай алкоголь.'
-    ],
+    warnings:['Не растирай снегом — снег режет кожу.','Не мажь жиром и маслом.','Не отогревай в горячей воде.','Не давай алкоголь.'],
     note:'Обморожение может развиться за 10 минут при −20 °C с ветром. Первые признаки: покалывание, онемение, белая кожа.'
   },
-  {
-    id:'drowning', icon:'waves',
-    name:'Утопление',
-    hint:'Вытащили из воды',
+  { id:'drowning', icon:'waves', name:'Утопление', hint:'Вытащили из воды',
     category:'crit-deep', filter:'crit',
     title:'Утопление',
     sub:'Человека вытащили из воды. Не дышит или дышит с трудом.',
-    keywords:['утопление','вода','утонул','вытащили','река','море'],
     steps:[
       {n:1,t:'Не прыгай, если не умеешь',d:'Брось верёвку, палку, круг, протяни руку. Утонуть вдвоём — не помощь.',crit:true},
       {n:2,t:'На берегу проверь дыхание',d:'Ухом ко рту, смотри на грудь, 10 секунд.'},
@@ -1745,29 +962,13 @@ var CONDITIONS = [
       {n:5,t:'Сними мокрую одежду',d:'Укутай — переохлаждение опасно.'},
       {n:6,t:'Дышит — на бок',d:'Проверяй дыхание каждые 2 минуты.'}
     ],
-    warnings:[
-      'Не прыгай в воду без навыков.',
-      'Не тряси и не переворачивай человека вверх ногами.',
-      'Не согревай слишком быстро.',
-      'Не оставляй одного.'
-    ],
+    warnings:['Не прыгай в воду без навыков.','Не тряси и не переворачивай человека вверх ногами.','Не согревай слишком быстро.','Не оставляй одного.'],
     note:'В холодной воде человек может выжить дольше — организм замедляется. Даже если кажется, что всё, — качай сердце и зови скорую.'
   },
-  {
-    id:'call', icon:'phone', name:'Как вызвать скорую', hint:'Что сказать диспетчеру',
-    category:'help', filter:'help', isLink:true, linkTo:'p-call',
-    title:'Как вызвать скорую', sub:'Что говорить диспетчеру и что делать до приезда'
-  },
-  {
-    id:'legal', icon:'scale', name:'Закон о помощи', hint:'Ты имеешь право помогать',
-    category:'help', filter:'help', isLink:true, linkTo:'p-legal',
-    title:'Юридическая справка', sub:'Права и защита того, кто помогает'
-  }
+  { id:'call', icon:'phone', name:'Как вызвать скорую', hint:'Что сказать диспетчеру', category:'help', filter:'help', isLink:true, linkTo:'p-call' },
+  { id:'legal', icon:'scale', name:'Закон о помощи', hint:'Ты имеешь право помогать', category:'help', filter:'help', isLink:true, linkTo:'p-legal' }
 ];
 
-/* ═══════════════════════════════════════════════════════════════
-   STATE
-   ═══════════════════════════════════════════════════════════════ */
 var State = {
   theme:'dark', themeMode:'auto', font:'normal', metronome:true,
   currentCondition:null, currentPage:'p-home', filter:'all',
@@ -1787,31 +988,20 @@ try {
   var prog = localStorage.getItem('eh.stepProgress');
   if(prog) State.stepProgress = JSON.parse(prog);
   var favs = localStorage.getItem('eh.favorites');
-  if(favs){
-    var arr = JSON.parse(favs);
-    if(Array.isArray(arr)) State.favorites = arr;
-  }
+  if(favs){ var arr = JSON.parse(favs); if(Array.isArray(arr)) State.favorites = arr; }
 } catch(e){}
 
-/* ═══════════════════════════════════════════════════════════════
-   ТЕМА
-   ═══════════════════════════════════════════════════════════════ */
 var darkMQ = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
 function resolveTheme(){
   if(State.themeMode==='auto') return darkMQ && darkMQ.matches ? 'dark' : 'light';
   return State.themeMode;
 }
 function applyTheme(){
-  var t = resolveTheme();
-  State.theme = t;
+  var t = resolveTheme(); State.theme = t;
   document.documentElement.setAttribute('data-theme', t);
-  var m = $('metaTheme');
-  if(m) m.setAttribute('content', t==='dark' ? '#0a0906' : '#faf6ec');
+  var m = $('metaTheme'); if(m) m.setAttribute('content', t==='dark' ? '#0a0906' : '#faf6ec');
   var ic = $('themeIcon');
-  if(ic){
-    ic.innerHTML = svg(t==='dark' ? 'moon' : 'sun', 22);
-    ic.dataset.iconFilled = '1';
-  }
+  if(ic){ ic.innerHTML = svg(t==='dark' ? 'moon' : 'sun', 22); ic.dataset.iconFilled = '1'; }
 }
 if(darkMQ && darkMQ.addEventListener){
   darkMQ.addEventListener('change', function(){ if(State.themeMode==='auto') applyTheme(); });
@@ -1826,13 +1016,9 @@ function toggleTheme(){
   var i = order.indexOf(State.themeMode);
   State.themeMode = order[(i+1)%order.length];
   try { localStorage.setItem('eh.themeMode', State.themeMode); } catch(e){}
-  applyTheme();
-  updateSettingsUI();
+  applyTheme(); updateSettingsUI();
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ИЗБРАННОЕ
-   ═══════════════════════════════════════════════════════════════ */
 function isFav(id){ return State.favorites.indexOf(id) >= 0; }
 function toggleFavorite(id){
   var i = State.favorites.indexOf(id);
@@ -1852,202 +1038,108 @@ function updateStarButton(btn, id){
   btn.innerHTML = svg(on ? 'star-filled' : 'star', 22);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   КОМАНДНАЯ ПАНЕЛЬ
-   ═══════════════════════════════════════════════════════════════ */
 function openCommands(){
-  var p = $('cmdPanel');
-  if(!p || State.commandsOpen) return;
+  var p = $('cmdPanel'); if(!p || State.commandsOpen) return;
   State.lastFocusedBeforeCommands = document.activeElement;
   p.classList.add('on');
   p.setAttribute('aria-hidden','false');
   State.commandsOpen = true;
-  /* will-change только на время анимации */
   var sheet = $('cmdSheet');
-  if(sheet){
-    sheet.style.willChange = 'transform';
-    setTimeout(function(){ sheet.style.willChange = ''; }, 300);
-  }
+  if(sheet){ sheet.style.willChange = 'transform'; setTimeout(function(){ sheet.style.willChange = ''; }, 300); }
   var closeBtn = p.querySelector('.cmd-close');
   if(closeBtn) setTimeout(function(){ try { closeBtn.focus(); } catch(e){} }, 30);
 }
 function closeCommands(){
-  var p = $('cmdPanel');
-  if(!p || !State.commandsOpen) return;
-  p.classList.remove('on');
-  p.setAttribute('aria-hidden','true');
+  var p = $('cmdPanel'); if(!p || !State.commandsOpen) return;
+  p.classList.remove('on'); p.setAttribute('aria-hidden','true');
   State.commandsOpen = false;
   var prev = State.lastFocusedBeforeCommands;
   State.lastFocusedBeforeCommands = null;
-  if(prev && prev.focus){
-    setTimeout(function(){ try { prev.focus(); } catch(e){} }, 30);
-  }
+  if(prev && prev.focus) setTimeout(function(){ try { prev.focus(); } catch(e){} }, 30);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SHARE / SAVE
-   ═══════════════════════════════════════════════════════════════ */
+/* ─── SHARE: копирует каноническую ссылку в буфер ─── */
 function shareApp(){
-  if(location.protocol === 'file:'){
-    saveApp();
-    return;
-  }
-  var cleanUrl = location.href.split('#')[0];
-  var data = {
-    title: 'Экстренная помощь',
-    text: 'Первая помощь простыми словами. Крупный шрифт. Работает офлайн. Бесплатно.',
-    url: cleanUrl
-  };
-  if(navigator.share){
-    try {
-      navigator.share(data).catch(function(err){
-        if(err && err.name === 'AbortError') return;
-        copyUrlFallback(cleanUrl);
-      });
-    } catch(e){
-      copyUrlFallback(cleanUrl);
-    }
-  } else {
-    copyUrlFallback(cleanUrl);
-  }
+  copyUrlFallback();
 }
-
-function copyUrlFallback(url){
+function copyUrlFallback(){
+  var url = CANONICAL_URL;
   if(navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(url).then(function(){
-      toast('Ссылка скопирована. Вставь в сообщение.');
+      toast('Ссылка скопирована: ' + url);
     }).catch(function(){ legacyCopy(url); });
   } else legacyCopy(url);
 }
-
 function legacyCopy(text){
   try {
     var ta = document.createElement('textarea');
-    ta.value = text;
-    ta.setAttribute('readonly','');
-    ta.style.position = 'fixed';
-    ta.style.left = '-9999px';
-    ta.style.top = '0';
-    document.body.appendChild(ta);
-    ta.select();
-    ta.setSelectionRange(0, ta.value.length);
+    ta.value = text; ta.setAttribute('readonly','');
+    ta.style.position = 'fixed'; ta.style.left = '-9999px'; ta.style.top = '0';
+    document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, ta.value.length);
     var ok = document.execCommand('copy');
     document.body.removeChild(ta);
-    toast(ok ? 'Ссылка скопирована.' : ('Скопируй вручную: ' + text));
-  } catch(e){
-    toast('Скопируй вручную: ' + text);
-  }
+    toast(ok ? 'Ссылка скопирована: ' + text : ('Скопируй вручную: ' + text));
+  } catch(e){ toast('Скопируй вручную: ' + text); }
 }
 
-/* Save: на мобильных — share API с файлом, на десктопе — сразу download */
+/* ─── SAVE: на мобильных — share API с файлом, на десктопе — download ─── */
 function saveApp(){
   try {
     var html = buildCleanHtml();
     var blob = new Blob([html], { type: 'text/html;charset=utf-8' });
     var fileName = 'экстренная-помощь.html';
-
     if(isMobileDevice() && location.protocol !== 'file:' && navigator.canShare){
       try {
         var file = new File([blob], fileName, { type: 'text/html' });
         if(navigator.canShare({ files: [file] })){
-          navigator.share({
-            files: [file],
-            title: 'Экстренная помощь',
-            text: 'Открой файл в браузере — работает офлайн.'
-          }).then(function(){
-            toast('Готово');
-          }).catch(function(err){
-            if(err && err.name === 'AbortError') return;
-            downloadBlob(blob, fileName);
-          });
+          navigator.share({ files: [file], title: 'Экстренная помощь', text: 'Открой файл в браузере — работает офлайн.' })
+            .then(function(){ toast('Готово'); })
+            .catch(function(err){ if(err && err.name === 'AbortError') return; downloadBlob(blob, fileName); });
           return;
         }
-      } catch(e){ /* fallthrough */ }
+      } catch(e){}
     }
-
     downloadBlob(blob, fileName);
-  } catch(e){
-    toast('Не удалось сохранить: ' + (e && e.message ? e.message : 'ошибка'));
-  }
+  } catch(e){ toast('Не удалось сохранить: ' + (e && e.message ? e.message : 'ошибка')); }
 }
-
 function buildCleanHtml(){
   var clone = document.documentElement.cloneNode(true);
-
-  /* Убрать runtime-блобы из head */
   var stale = clone.querySelectorAll('link[rel="manifest"], link[rel="icon"], link[rel="apple-touch-icon"]');
   for(var i = 0; i < stale.length; i++){
     var h = stale[i].getAttribute('href') || '';
-    if(h.indexOf('blob:') === 0){
-      stale[i].parentNode.removeChild(stale[i]);
-    }
+    if(h.indexOf('blob:') === 0) stale[i].parentNode.removeChild(stale[i]);
   }
-
-  /* Закрыть панель команд */
   var cmdPanel = clone.querySelector('#cmdPanel');
-  if(cmdPanel){
-    cmdPanel.classList.remove('on');
-    cmdPanel.setAttribute('aria-hidden','true');
-  }
-
-  /* Показать только главную */
+  if(cmdPanel){ cmdPanel.classList.remove('on'); cmdPanel.setAttribute('aria-hidden','true'); }
   var pages = clone.querySelectorAll('.page');
-  for(var j = 0; j < pages.length; j++){
-    pages[j].classList.toggle('on', pages[j].id === 'p-home');
-  }
-
-  /* Убрать runtime-атрибуты */
+  for(var j = 0; j < pages.length; j++) pages[j].classList.toggle('on', pages[j].id === 'p-home');
   var focused = clone.querySelectorAll('[tabindex="-1"]');
-  for(var k = 0; k < focused.length; k++){
-    focused[k].removeAttribute('tabindex');
-  }
-  var willChange = clone.querySelectorAll('[style*="will-change"]');
-  for(var w = 0; w < willChange.length; w++){
-    willChange[w].style.willChange = '';
-  }
-
-  /* Очистить runtime-контент detail */
-  var detContent = clone.querySelector('#det-content');
-  if(detContent) detContent.innerHTML = '';
-  var metronomeSlot = clone.querySelector('#metronomeSlot');
-  if(metronomeSlot) metronomeSlot.innerHTML = '';
-  var seizureSlot = clone.querySelector('#seizureSlot');
-  if(seizureSlot) seizureSlot.innerHTML = '';
-
-  /* Сбросить кнопку «наверх» */
-  var scrollTop = clone.querySelector('#scrollTopBtn');
-  if(scrollTop) scrollTop.classList.remove('on');
-
+  for(var k = 0; k < focused.length; k++) focused[k].removeAttribute('tabindex');
+  var wc = clone.querySelectorAll('[style*="will-change"]');
+  for(var w = 0; w < wc.length; w++) wc[w].style.willChange = '';
+  var dc = clone.querySelector('#det-content'); if(dc) dc.innerHTML = '';
+  var ms = clone.querySelector('#metronomeSlot'); if(ms) ms.innerHTML = '';
+  var ss = clone.querySelector('#seizureSlot'); if(ss) ss.innerHTML = '';
+  var st = clone.querySelector('#scrollTopBtn'); if(st) st.classList.remove('on');
   return '<!DOCTYPE html>\n' + clone.outerHTML;
 }
-
 function downloadBlob(blob, name){
   try {
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
-    a.href = url;
-    a.download = name;
-    a.rel = 'noopener';
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
+    a.href = url; a.download = name; a.rel = 'noopener'; a.style.display = 'none';
+    document.body.appendChild(a); a.click();
     setTimeout(function(){
       if(a.parentNode) a.parentNode.removeChild(a);
       try { URL.revokeObjectURL(url); } catch(e){}
     }, 1500);
     toast('Файл сохраняется…');
-  } catch(e){
-    toast('Не удалось скачать файл');
-  }
+  } catch(e){ toast('Не удалось скачать файл'); }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   WAKE LOCK
-   ═══════════════════════════════════════════════════════════════ */
 function requestWakeLock(){
   try {
-    if(!('wakeLock' in navigator)) return;
-    if(State.wakeLock) return;
+    if(!('wakeLock' in navigator) || State.wakeLock) return;
     navigator.wakeLock.request('screen').then(function(wl){
       State.wakeLock = wl;
       wl.addEventListener('release', function(){ State.wakeLock = null; });
@@ -2055,21 +1147,15 @@ function requestWakeLock(){
   } catch(e){}
 }
 function releaseWakeLock(){
-  if(State.wakeLock){
-    try { State.wakeLock.release(); } catch(e){}
-    State.wakeLock = null;
-  }
+  if(State.wakeLock){ try { State.wakeLock.release(); } catch(e){} State.wakeLock = null; }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   НАВИГАЦИЯ
-   ═══════════════════════════════════════════════════════════════ */
 var PAGE_META = {
   'p-home':     { title:'Экстренная помощь', icon:'siren', sub:'для не медиков · v2.5', nav:'home' },
-  'p-detail':   { title:'—',                 icon:'siren', sub:'—',                       nav:null },
+  'p-detail':   { title:'—', icon:'siren', sub:'—', nav:null },
   'p-call':     { title:'Как вызвать скорую', icon:'phone', sub:'что говорить диспетчеру', nav:'call' },
-  'p-legal':    { title:'Закон о помощи',    icon:'scale', sub:'права и защита',            nav:'legal' },
-  'p-settings': { title:'Настройки',         icon:'settings', sub:'тема, шрифт, метроном', nav:'settings' }
+  'p-legal':    { title:'Закон о помощи', icon:'scale', sub:'права и защита', nav:'legal' },
+  'p-settings': { title:'Настройки', icon:'settings', sub:'тема, шрифт, метроном', nav:'settings' }
 };
 
 function showPage(id){
@@ -2079,38 +1165,29 @@ function showPage(id){
   var headerName = $('headerName'), headerSub = $('headerSub'), markIcon = $('markIcon');
   var backBtn = $('backBtn'), crumbs = $('crumbs'), crumbCur = $('crumbCur'), footer = $('footer');
 
-  if(headerName) headerName.textContent = (id==='p-detail' && State.currentCondition)
-    ? State.currentCondition.title : meta.title;
-  if(headerSub) headerSub.textContent = (id==='p-detail' && State.currentCondition)
-    ? 'алгоритм первой помощи' : meta.sub;
+  if(headerName) headerName.textContent = (id==='p-detail' && State.currentCondition) ? State.currentCondition.title : meta.title;
+  if(headerSub) headerSub.textContent = (id==='p-detail' && State.currentCondition) ? 'алгоритм первой помощи' : meta.sub;
   if(markIcon){
-    var iconName = (id==='p-detail' && State.currentCondition)
-      ? State.currentCondition.icon : meta.icon;
+    var iconName = (id==='p-detail' && State.currentCondition) ? State.currentCondition.icon : meta.icon;
     markIcon.innerHTML = svg(iconName, 26);
   }
   if(backBtn) backBtn.classList.toggle('on', id==='p-detail');
   if(crumbs) crumbs.classList.toggle('on', id==='p-detail');
-  if(crumbCur) crumbCur.textContent = (id==='p-detail' && State.currentCondition)
-    ? State.currentCondition.name : '';
+  if(crumbCur) crumbCur.textContent = (id==='p-detail' && State.currentCondition) ? State.currentCondition.name : '';
   if(footer) footer.classList.toggle('hidden', id==='p-detail');
 
   $$('.bottom-nav button').forEach(function(b){
     var active = b.dataset.nav === (meta.nav || '');
     b.classList.toggle('on', active);
-    if(active) b.setAttribute('aria-current','page');
-    else b.removeAttribute('aria-current');
+    if(active) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
   });
 
-  /* Остановить всё «активное», если уходим с detail */
-  if(id !== 'p-detail'){
-    stopMetronome(); stopSpeech(); releaseWakeLock(); stopSeizureTimer();
-  }
+  if(id !== 'p-detail'){ stopMetronome(); stopSpeech(); releaseWakeLock(); stopSeizureTimer(); }
   if(id === 'p-detail' && State.currentCondition){
     if(State.currentCondition.id !== 'cpr'){ stopMetronome(); releaseWakeLock(); }
     if(State.currentCondition.id !== 'seizure'){ stopSeizureTimer(); }
   }
 
-  /* Hash для URL — detail получает id условия */
   var hash;
   if(id === 'p-home') hash = '';
   else if(id === 'p-detail' && State.currentCondition) hash = '#/' + State.currentCondition.id;
@@ -2123,13 +1200,11 @@ function showPage(id){
     } catch(e){}
   }
 
-  /* Перевести фокус на заголовок новой страницы */
   var h1 = document.querySelector('#' + id + ' h1, #' + id + ' h2');
   if(h1){
     if(!h1.hasAttribute('tabindex')) h1.setAttribute('tabindex','-1');
     try { h1.focus({ preventScroll:true }); } catch(e){}
   }
-
   window.scrollTo({ top:0, behavior:'auto' });
 }
 
@@ -2162,31 +1237,20 @@ function openCondition(id){
   State.currentCondition = c;
   renderDetail(c);
   showPage('p-detail');
-  /* Метроном стартует синхронно из user-gesture — иначе AudioContext будет suspended */
-  if(c.metronome && State.metronome){
-    startMetronome();
-    requestWakeLock();
-  }
+  if(c.metronome && State.metronome){ startMetronome(); requestWakeLock(); }
   if(c.timer) startSeizureTimer();
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   RENDER DETAIL
-   ═══════════════════════════════════════════════════════════════ */
 function renderDetail(c){
-  var detIc = $('det-ic');
-  if(detIc) detIc.innerHTML = svg(c.icon, 72);
-  var detTitle = $('det-title');
-  if(detTitle) detTitle.textContent = c.title;
-  var detSub = $('det-sub');
-  if(detSub) detSub.textContent = c.sub || '';
+  var detIc = $('det-ic'); if(detIc) detIc.innerHTML = svg(c.icon, 72);
+  var detTitle = $('det-title'); if(detTitle) detTitle.textContent = c.title;
+  var detSub = $('det-sub'); if(detSub) detSub.textContent = c.sub || '';
 
   var prog = State.stepProgress[c.id] || {};
   var html = '';
 
   if(c.timer){
-    $('seizureSlot').innerHTML =
-      '<div class="seizure-timer" id="seizureTimerBox">' +
+    $('seizureSlot').innerHTML = '<div class="seizure-timer" id="seizureTimerBox">' +
       '<div class="ic">' + svg('activity', 44) + '</div>' +
       '<div><div class="t">Идёт приступ · если больше 5 минут — звони 112</div>' +
       '<div class="time" id="seizureTime">0:00</div></div></div>';
@@ -2202,23 +1266,17 @@ function renderDetail(c){
     var cls = 'step';
     if(s.crit) cls += ' crit';
     if(done) cls += ' done';
-    html += '<button type="button" class="' + cls + '" data-act="toggle-step" data-step="' + s.n + '" ' +
-      'role="listitem" aria-pressed="' + (done?'true':'false') + '">' +
+    html += '<button type="button" class="' + cls + '" data-act="toggle-step" data-step="' + s.n + '" role="listitem" aria-pressed="' + (done?'true':'false') + '">' +
       '<span class="checkbox" aria-hidden="true"><span class="num-text">' + s.n + '</span></span>' +
       '<span class="body"><span class="t">' + esc(s.t) + '</span>' +
-      '<span class="d">' + esc(s.d) + '</span></span>' +
-      '</button>';
+      '<span class="d">' + esc(s.d) + '</span></span></button>';
   }
   html += '</div>';
-
   html += '<div id="checkCard"></div>';
 
   if(c.warnings && c.warnings.length){
-    html += '<div class="warning-block">';
-    html += '<div class="t">' + svg('x', 20) + 'Чего НЕ делать</div><ul>';
-    for(var w=0;w<c.warnings.length;w++){
-      html += '<li>' + esc(c.warnings[w]) + '</li>';
-    }
+    html += '<div class="warning-block"><div class="t">' + svg('x', 20) + 'Чего НЕ делать</div><ul>';
+    for(var w=0;w<c.warnings.length;w++) html += '<li>' + esc(c.warnings[w]) + '</li>';
     html += '</ul></div>';
   }
   if(c.note){
@@ -2296,7 +1354,6 @@ function toggleStep(n){
   updateProgress();
   updateCheckCard();
 }
-
 function resetSteps(){
   if(!State.currentCondition) return;
   var c = State.currentCondition;
@@ -2305,9 +1362,6 @@ function resetSteps(){
   renderDetail(c);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ТАЙМЕР ПРИСТУПА
-   ═══════════════════════════════════════════════════════════════ */
 function startSeizureTimer(){
   stopSeizureTimer();
   State.seizureStart = Date.now();
@@ -2315,10 +1369,7 @@ function startSeizureTimer(){
   State.seizureTimer = setInterval(updateSeizureTimer, 1000);
 }
 function stopSeizureTimer(){
-  if(State.seizureTimer){
-    clearInterval(State.seizureTimer);
-    State.seizureTimer = null;
-  }
+  if(State.seizureTimer){ clearInterval(State.seizureTimer); State.seizureTimer = null; }
 }
 function updateSeizureTimer(){
   var el = $('seizureTime');
@@ -2336,9 +1387,6 @@ function updateSeizureTimer(){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   МЕТРОНОМ
-   ═══════════════════════════════════════════════════════════════ */
 function renderMetronomePanel(){
   var on = State.metronomeActive;
   return '<div class="metronome-panel">' +
@@ -2350,7 +1398,6 @@ function renderMetronomePanel(){
     svg(on ? 'stop' : 'play', 22) + (on ? 'Стоп' : 'Пуск') + '</button>' +
     '</div></div></div>';
 }
-
 function startMetronome(){
   if(State.metronomeActive) return;
   if(!State.metronome){ toast('Метроном выключен в настройках'); return; }
@@ -2358,33 +1405,23 @@ function startMetronome(){
   if(!Ctx){ toast('Метроном не поддерживается'); return; }
   try {
     State.metronomeCtx = new Ctx();
-    if(State.metronomeCtx.state === 'suspended'){
-      try { State.metronomeCtx.resume(); } catch(e){}
-    }
+    if(State.metronomeCtx.state === 'suspended'){ try { State.metronomeCtx.resume(); } catch(e){} }
     State.metronomeActive = true;
-    var bpm = 110;
-    var interval = 60 / bpm;
-    var lookahead = 0.12;
+    var bpm = 110, interval = 60 / bpm, lookahead = 0.12;
     var nextBeat = State.metronomeCtx.currentTime + 0.06;
-
     function scheduleBeep(when){
-      var ctx = State.metronomeCtx;
-      if(!ctx) return;
+      var ctx = State.metronomeCtx; if(!ctx) return;
       try {
         var osc = ctx.createOscillator();
         var gain = ctx.createGain();
-        osc.type = 'square';
-        osc.frequency.value = 880;
+        osc.type = 'square'; osc.frequency.value = 880;
         gain.gain.setValueAtTime(0.0001, when);
         gain.gain.exponentialRampToValueAtTime(0.34, when + 0.004);
         gain.gain.exponentialRampToValueAtTime(0.0001, when + 0.09);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(when);
-        osc.stop(when + 0.1);
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.start(when); osc.stop(when + 0.1);
       } catch(e){}
     }
-
     function scheduler(){
       if(!State.metronomeActive || !State.metronomeCtx) return;
       try {
@@ -2399,27 +1436,15 @@ function startMetronome(){
     nextBeat += interval;
     scheduler();
     updateMetronomeUI();
-  } catch(e){
-    toast('Ошибка метронома');
-    State.metronomeActive = false;
-  }
+  } catch(e){ toast('Ошибка метронома'); State.metronomeActive = false; }
 }
 function stopMetronome(){
   State.metronomeActive = false;
-  if(State.metronomeTimer){
-    clearTimeout(State.metronomeTimer);
-    State.metronomeTimer = null;
-  }
-  if(State.metronomeCtx){
-    try { State.metronomeCtx.close(); } catch(e){}
-    State.metronomeCtx = null;
-  }
+  if(State.metronomeTimer){ clearTimeout(State.metronomeTimer); State.metronomeTimer = null; }
+  if(State.metronomeCtx){ try { State.metronomeCtx.close(); } catch(e){} State.metronomeCtx = null; }
   updateMetronomeUI();
 }
-function toggleMetronome(){
-  if(State.metronomeActive) stopMetronome();
-  else startMetronome();
-}
+function toggleMetronome(){ if(State.metronomeActive) stopMetronome(); else startMetronome(); }
 function updateMetronomeUI(){
   var slot = $('metronomeSlot');
   if(slot && State.currentCondition && State.currentCondition.metronome){
@@ -2427,9 +1452,6 @@ function updateMetronomeUI(){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ГОЛОС
-   ═══════════════════════════════════════════════════════════════ */
 function stopSpeech(){
   try { window.speechSynthesis.cancel(); } catch(e){}
   State.speaking = false;
@@ -2441,8 +1463,7 @@ function speakDetail(){
   var c = State.currentCondition;
   if(State.speaking){ stopSpeech(); return; }
   if(!('speechSynthesis' in window)){ toast('Голосовое чтение не поддерживается'); return; }
-  var parts = [];
-  parts.push(c.title + '.');
+  var parts = [c.title + '.'];
   if(c.sub) parts.push(c.sub);
   for(var i=0;i<c.steps.length;i++){
     parts.push('Шаг ' + c.steps[i].n + '. ' + c.steps[i].t + '.');
@@ -2459,8 +1480,7 @@ function speakDetail(){
   function speakNext(idx){
     if(!State.speaking || idx >= parts.length){ stopSpeech(); return; }
     var u = new SpeechSynthesisUtterance(parts[idx]);
-    u.lang = 'ru-RU';
-    u.rate = 0.92;
+    u.lang = 'ru-RU'; u.rate = 0.92;
     u.onend = function(){ if(State.speaking) speakNext(idx+1); };
     u.onerror = function(){ stopSpeech(); };
     try { window.speechSynthesis.speak(u); } catch(e){ stopSpeech(); }
@@ -2469,34 +1489,25 @@ function speakDetail(){
   speakNext(0);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   GRID
-   ═══════════════════════════════════════════════════════════════ */
 function renderGrid(){
-  var grid = $('cardsGrid');
-  if(!grid) return;
+  var grid = $('cardsGrid'); if(!grid) return;
   var f = State.filter;
   var filtered = [];
   for(var i=0;i<CONDITIONS.length;i++){
     var c = CONDITIONS[i];
-    if(f === 'fav'){
-      if(!isFav(c.id)) continue;
-    } else if(f !== 'all' && c.filter !== f) continue;
+    if(f === 'fav'){ if(!isFav(c.id)) continue; }
+    else if(f !== 'all' && c.filter !== f) continue;
     filtered.push(c);
   }
   var order = { 'crit-deep':0, 'crit':1, 'warn':2, 'help':3 };
   filtered.sort(function(a,b){ return (order[a.category]||99) - (order[b.category]||99); });
 
   if(!filtered.length){
-    var emptyMsg = f==='fav'
-      ? 'В избранном пусто. Нажми ⭐ на карточке.'
-      : 'Ничего не найдено';
+    var emptyMsg = f==='fav' ? 'В избранном пусто. Нажми ⭐ на карточке.' : 'Ничего не найдено';
     grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;color:var(--t3);font-style:italic;font-size:18px">' + emptyMsg + '</div>';
-    var gt0 = $('gridTitle');
-    if(gt0) gt0.textContent = f==='fav' ? 'Избранное' : 'Ничего не найдено';
+    var gt0 = $('gridTitle'); if(gt0) gt0.textContent = f==='fav' ? 'Избранное' : 'Ничего не найдено';
     return;
   }
-
   var html = '';
   for(var k=0;k<filtered.length;k++){
     var cc = filtered[k];
@@ -2506,17 +1517,13 @@ function renderGrid(){
       '<span><span class="ic">' + svg(cc.icon, 48) + '</span>' +
       '<span class="n">' + esc(cc.name) + '</span></span>' +
       '<span class="h">' + esc(cc.hint) + '</span>' +
-      '<span class="arrow">' + svg('chevron-right', 20) + '</span>' +
-      '</button>' +
+      '<span class="arrow">' + svg('chevron-right', 20) + '</span></button>' +
       '<button type="button" class="star-btn' + (fav?' on':'') + '" data-act="fav" data-id="' + esc(cc.id) + '" ' +
       'aria-label="' + (fav ? 'Убрать из избранного' : 'Добавить в избранное') + '" ' +
       'aria-pressed="' + (fav?'true':'false') + '">' +
-      svg(fav ? 'star-filled' : 'star', 22) +
-      '</button>' +
-      '</div>';
+      svg(fav ? 'star-filled' : 'star', 22) + '</button></div>';
   }
   grid.innerHTML = html;
-
   var gt = $('gridTitle');
   if(gt){
     if(f === 'fav') gt.textContent = 'Избранное (' + filtered.length + ')';
@@ -2527,9 +1534,6 @@ function renderGrid(){
   }
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   НАСТРОЙКИ
-   ═══════════════════════════════════════════════════════════════ */
 function updateSettingsUI(){
   var all = $$('[data-setting="theme"] button');
   for(var i=0;i<all.length;i++){
@@ -2560,8 +1564,7 @@ function setSetting(name, value){
     try { localStorage.setItem('eh.themeMode', value); } catch(e){}
     applyTheme();
   } else if(name === 'font'){
-    State.font = value;
-    applyFont();
+    State.font = value; applyFont();
   } else if(name === 'metronome'){
     State.metronome = (value === 'on');
     try { localStorage.setItem('eh.metronome', value); } catch(e){}
@@ -2571,14 +1574,10 @@ function setSetting(name, value){
   updateSettingsUI();
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   ОБРАБОТЧИКИ
-   ═══════════════════════════════════════════════════════════════ */
 document.addEventListener('click', function(e){
   var t = e.target.closest ? e.target.closest('[data-act]') : null;
   if(!t) return;
   var act = t.dataset.act;
-
   if(act === 'theme') toggleTheme();
   else if(act === 'print') window.print();
   else if(act === 'back'){ closeCommands(); showPage('p-home'); }
@@ -2593,10 +1592,7 @@ document.addEventListener('click', function(e){
   else if(act === 'share'){ if(State.commandsOpen) closeCommands(); shareApp(); }
   else if(act === 'save'){ if(State.commandsOpen) closeCommands(); saveApp(); }
   else if(act === 'scroll-top') window.scrollTo({ top:0, behavior:'smooth' });
-  else if(act === 'goto'){
-    closeCommands();
-    if(t.dataset.to) showPage(t.dataset.to);
-  }
+  else if(act === 'goto'){ closeCommands(); if(t.dataset.to) showPage(t.dataset.to); }
   else if(act === 'filter'){
     State.filter = t.dataset.cat;
     var chips = $$('.chip');
@@ -2609,7 +1605,6 @@ document.addEventListener('click', function(e){
   }
 });
 
-/* Нижняя навигация */
 $$('.bottom-nav button').forEach(function(b){
   b.addEventListener('click', function(){
     var nav = b.dataset.nav;
@@ -2630,7 +1625,6 @@ $$('.bottom-nav button').forEach(function(b){
   });
 });
 
-/* Настройки */
 document.addEventListener('click', function(e){
   var s = e.target.closest ? e.target.closest('[data-setting] button') : null;
   if(!s) return;
@@ -2639,35 +1633,25 @@ document.addEventListener('click', function(e){
   setSetting(parent.dataset.setting, s.dataset.val);
 });
 
-/* Клавиатура */
 document.addEventListener('keydown', function(e){
   if(e.key === 'Escape'){
     if(State.commandsOpen){ closeCommands(); return; }
     if(State.currentPage === 'p-detail') showPage('p-home');
     return;
   }
-  /* Focus trap для командной панели */
   if(State.commandsOpen && e.key === 'Tab'){
-    var sheet = $('cmdSheet');
-    if(!sheet) return;
+    var sheet = $('cmdSheet'); if(!sheet) return;
     var focusables = sheet.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
     var list = Array.prototype.filter.call(focusables, function(el){
       return !el.disabled && el.offsetParent !== null;
     });
     if(!list.length) return;
-    var first = list[0];
-    var last = list[list.length - 1];
-    if(e.shiftKey && document.activeElement === first){
-      e.preventDefault();
-      last.focus();
-    } else if(!e.shiftKey && document.activeElement === last){
-      e.preventDefault();
-      first.focus();
-    }
+    var first = list[0], last = list[list.length - 1];
+    if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
   }
 });
 
-/* Скролл-кнопка. Passive — не блокирует главный поток. */
 var _scrollRafPending = false;
 window.addEventListener('scroll', function(){
   if(_scrollRafPending) return;
@@ -2675,51 +1659,34 @@ window.addEventListener('scroll', function(){
   requestAnimationFrame(function(){
     _scrollRafPending = false;
     var btn = $('scrollTopBtn');
-    if(!btn) return;
-    btn.classList.toggle('on', window.scrollY > 400);
+    if(btn) btn.classList.toggle('on', window.scrollY > 400);
   });
 }, { passive: true });
 
-/* Визибилити: не убиваем метроном, только speech */
 document.addEventListener('visibilitychange', function(){
   if(document.hidden){
     if(State.speaking) stopSpeech();
   } else {
-    /* Если AudioContext ушёл в suspended — вернуть */
     if(State.metronomeActive && State.metronomeCtx && State.metronomeCtx.state === 'suspended'){
       try { State.metronomeCtx.resume(); } catch(e){}
     }
-    if(State.currentCondition && State.currentCondition.metronome && State.metronomeActive){
-      requestWakeLock();
-    }
+    if(State.currentCondition && State.currentCondition.metronome && State.metronomeActive) requestWakeLock();
   }
 });
 
-/* ═══════════════════════════════════════════════════════════════
-   TOAST
-   ═══════════════════════════════════════════════════════════════ */
 function toast(msg){
   var el = document.createElement('div');
   el.setAttribute('role','status');
   el.setAttribute('aria-live','polite');
-  el.style.cssText = 'position:fixed;bottom:calc(var(--nav-h) + var(--safe-bot) + 16px);' +
-    'left:50%;transform:translateX(-50%);background:#161410;color:#f5efe0;' +
-    'padding:16px 22px;border-radius:16px;border:1px solid #4a4538;' +
-    'font-size:calc(16px * var(--font-scale));z-index:9999;max-width:92vw;' +
-    'box-shadow:0 12px 32px rgba(0,0,0,.5);text-align:center;font-weight:600;' +
-    'pointer-events:none';
+  el.style.cssText = 'position:fixed;bottom:calc(var(--nav-h) + var(--safe-bot) + 16px);left:50%;transform:translateX(-50%);background:#161410;color:#f5efe0;padding:16px 22px;border-radius:16px;border:1px solid #4a4538;font-size:calc(16px * var(--font-scale));z-index:9999;max-width:92vw;box-shadow:0 12px 32px rgba(0,0,0,.5);text-align:center;font-weight:600;pointer-events:none';
   el.textContent = msg;
   document.body.appendChild(el);
   setTimeout(function(){
-    el.style.transition = 'opacity .3s';
-    el.style.opacity = '0';
+    el.style.transition = 'opacity .3s'; el.style.opacity = '0';
     setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 320);
   }, 2600);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   PWA ICON + MANIFEST
-   ═══════════════════════════════════════════════════════════════ */
 function generateIconDataURL(size){
   try {
     var canvas = document.createElement('canvas');
@@ -2727,22 +1694,17 @@ function generateIconDataURL(size){
     var ctx = canvas.getContext('2d');
     if(!ctx) return null;
     var grad = ctx.createLinearGradient(0, 0, size, size);
-    grad.addColorStop(0, '#e04545');
-    grad.addColorStop(1, '#7a1818');
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, size, size);
+    grad.addColorStop(0, '#e04545'); grad.addColorStop(1, '#7a1818');
+    ctx.fillStyle = grad; ctx.fillRect(0, 0, size, size);
     var cx = size / 2, cy = size / 2, s = size * 0.30;
     ctx.beginPath();
     ctx.moveTo(cx, cy + s * 0.9);
     ctx.bezierCurveTo(cx - s * 1.6, cy - s * 0.2, cx - s * 0.9, cy - s * 1.3, cx, cy - s * 0.4);
     ctx.bezierCurveTo(cx + s * 0.9, cy - s * 1.3, cx + s * 1.6, cy - s * 0.2, cx, cy + s * 0.9);
-    ctx.closePath();
-    ctx.fillStyle = '#ffffff';
-    ctx.fill();
+    ctx.closePath(); ctx.fillStyle = '#ffffff'; ctx.fill();
     ctx.strokeStyle = '#7a1818';
     ctx.lineWidth = Math.max(2, size * 0.045);
-    ctx.lineCap = 'round';
-    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     ctx.beginPath();
     var py = cy + s * 0.15;
     ctx.moveTo(cx - s * 1.1, py);
@@ -2760,32 +1722,15 @@ function setupPWA(){
   var icon192 = generateIconDataURL(192);
   var icon512 = generateIconDataURL(512);
   var icon32  = generateIconDataURL(32);
-  if(icon32){
-    var fav = document.createElement('link');
-    fav.rel = 'icon';
-    fav.type = 'image/png';
-    fav.href = icon32;
-    document.head.appendChild(fav);
-  }
-  if(icon192){
-    var apple = document.createElement('link');
-    apple.rel = 'apple-touch-icon';
-    apple.href = icon192;
-    document.head.appendChild(apple);
-  }
+  if(icon32){ var fav = document.createElement('link'); fav.rel='icon'; fav.type='image/png'; fav.href=icon32; document.head.appendChild(fav); }
+  if(icon192){ var apple = document.createElement('link'); apple.rel='apple-touch-icon'; apple.href=icon192; document.head.appendChild(apple); }
   if(!icon192 || !icon512) return;
   try {
     var manifest = {
-      name: 'Экстренная помощь',
-      short_name: 'Помощь',
+      name: 'Экстренная помощь', short_name: 'Помощь',
       description: 'Экстренная помощь простыми словами. Крупный шрифт. Офлайн.',
-      start_url: './',
-      scope: './',
-      display: 'standalone',
-      orientation: 'portrait',
-      background_color: '#0a0906',
-      theme_color: '#7a1818',
-      lang: 'ru',
+      start_url: './', scope: './', display: 'standalone', orientation: 'portrait',
+      background_color: '#0a0906', theme_color: '#7a1818', lang: 'ru',
       categories: ['medical','health','utilities'],
       icons: [
         { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any' },
@@ -2796,18 +1741,13 @@ function setupPWA(){
     var blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
     var url = URL.createObjectURL(blob);
     var link = document.createElement('link');
-    link.rel = 'manifest';
-    link.href = url;
+    link.rel = 'manifest'; link.href = url;
     document.head.appendChild(link);
   } catch(e){}
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SERVICE WORKER
-   ═══════════════════════════════════════════════════════════════ */
 function setupSW(){
-  if(!('serviceWorker' in navigator)) return;
-  if(location.protocol === 'file:') return;
+  if(!('serviceWorker' in navigator) || location.protocol === 'file:') return;
   var swSource = [
     "'use strict';",
     "var CACHE = 'eh-v2.5.0';",
@@ -2816,20 +1756,17 @@ function setupSW(){
     "self.addEventListener('fetch', function(e){",
     "  var req = e.request;",
     "  if(req.method !== 'GET') return;",
-    "  var url;",
-    "  try { url = new URL(req.url); } catch(err){ return; }",
+    "  var url; try { url = new URL(req.url); } catch(err){ return; }",
     "  if(url.origin !== location.origin) return;",
-    "  e.respondWith(",
-    "    caches.open(CACHE).then(function(c){",
-    "      return c.match(req, { ignoreSearch:true }).then(function(hit){",
-    "        if(hit) return hit;",
-    "        return fetch(req).then(function(resp){",
-    "          try { if(resp && resp.ok && resp.type === 'basic') c.put(req, resp.clone()); } catch(err){}",
-    "          return resp;",
-    "        }).catch(function(){ return c.match(req); });",
-    "      });",
-    "    })",
-    "  );",
+    "  e.respondWith(caches.open(CACHE).then(function(c){",
+    "    return c.match(req, { ignoreSearch:true }).then(function(hit){",
+    "      if(hit) return hit;",
+    "      return fetch(req).then(function(resp){",
+    "        try { if(resp && resp.ok && resp.type === 'basic') c.put(req, resp.clone()); } catch(err){}",
+    "        return resp;",
+    "      }).catch(function(){ return c.match(req); });",
+    "    });",
+    "  }));",
     "});"
   ].join('\n');
   navigator.serviceWorker.register('./sw.js', { scope: './' }).then(function(){
@@ -2841,17 +1778,12 @@ function setupSW(){
       navigator.serviceWorker.register(blobUrl, { scope: './' }).then(function(){
         console.log('SW: Blob');
       }).catch(function(err){
-        console.log('SW: недоступен — офлайн через кеш. ' + (err && err.message ? err.message : ''));
+        console.log('SW: недоступен. ' + (err && err.message ? err.message : ''));
       });
-    } catch(e){
-      console.log('SW: недоступен.');
-    }
+    } catch(e){ console.log('SW: недоступен.'); }
   });
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   INIT
-   ═══════════════════════════════════════════════════════════════ */
 function init(){
   fillIcons();
   applyTheme();
@@ -2861,11 +1793,10 @@ function init(){
   showPage(routeFromHash());
   setupPWA();
   setupSW();
-
   console.log('%c 🚨 Экстренная помощь v2.5.0 ',
     'background:linear-gradient(135deg,#e04545,#7a1818);color:#fff;padding:4px 12px;border-radius:4px;font-weight:700');
-  console.log('  ' + CONDITIONS.length + ' алгоритмов · PWA · избранное · SVG · панель команд · поделиться');
-  console.log('  CC0 · Public Domain · offline · без регистрации');
+  console.log('  ' + CONDITIONS.length + ' алгоритмов · PWA · избранное · OG-карточки');
+  console.log('  share → ' + CANONICAL_URL);
 }
 
 if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
