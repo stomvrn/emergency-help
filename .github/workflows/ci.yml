@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Проверка наличия index.html
+        run: |
+          if [ ! -f index.html ]; then
+            echo "::error::index.html не найден"
+            exit 1
+          fi
+          echo "✓ index.html на месте"
+
+      - name: Проверка размера (не более 500 КБ)
+        run: |
+          SIZE=$(stat -c%s index.html)
+          echo "Размер: $SIZE байт ($(echo "scale=1; $SIZE/1024" | bc) КБ)"
+          if [ "$SIZE" -gt 512000 ]; then
+            echo "::warning::index.html больше 500 КБ"
+          fi
+
+      - name: Проверка CSP connect-src
+        run: |
+          if ! grep -q "connect-src 'none'" index.html; then
+            echo "::error::CSP connect-src 'none' не найден"
+            exit 1
+          fi
+          echo "✓ CSP connect-src 'none' присутствует"
+
+      - name: Проверка CSP default-src
+        run: |
+          if ! grep -q "default-src 'none'" index.html; then
+            echo "::warning::CSP default-src 'none' не найден"
+          fi
+
+      - name: Проверка отсутствия unsafe-eval
+        run: |
+          if grep -q "unsafe-eval" index.html; then
+            echo "::error::Найден unsafe-eval в CSP"
+            exit 1
+          fi
+          echo "✓ unsafe-eval не используется"
+
+      - name: Проверка отсутствия внешних скриптов
+        run: |
+          if grep -E 'src="https?://' index.html; then
+            echo "::error::Найдены внешние скрипты"
+            exit 1
+          fi
+          echo "✓ Нет внешних скриптов"
+
+      - name: Проверка отсутствия внешних стилей
+        run: |
+          if grep -E 'href="https?://' index.html; then
+            echo "::error::Найдены внешние стили"
+            exit 1
+          fi
+          echo "✓ Нет внешних стилей"
+
+      - name: Проверка отсутствия eval()
+        run: |
+          if grep -E 'eval\s*\(' index.html; then
+            echo "::error::Найден eval()"
+            exit 1
+          fi
+          echo "✓ Нет eval()"
+
+      - name: Проверка URN в разметке
+        run: |
+          if ! grep -q 'urn:vanxo:artifact:emergency-help' index.html; then
+            echo "::error::URN не найден в index.html"
+            exit 1
+          fi
+          echo "✓ URN присутствует"
+
+      - name: Проверка синхронизации версии
+        run: |
+          FILE_VERSION=$(grep -oP 'data-version="\K[0-9]+\.[0-9]+\.[0-9]+' index.html | head -1)
+          JSON_VERSION=$(grep -oP '"version":\s*"\K[0-9]+\.[0-9]+\.[0-9]+' artifact.json | head -1)
+          echo "index.html: v$FILE_VERSION"
+          echo "artifact.json: v$JSON_VERSION"
+          if [ "$FILE_VERSION" != "$JSON_VERSION" ]; then
+            echo "::error::Версии не совпадают"
+            exit 1
+          fi
+          echo "✓ Версии совпадают"
+
+      - name: SHA-256 index.html
+        run: |
+          sha256sum index.html | tee /tmp/hash.txt
+          echo "### SHA-256 index.html" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          cat /tmp/hash.txt >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
