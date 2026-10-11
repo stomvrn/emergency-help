@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Проверить, что тег совпадает с версией
+        run: |
+          TAG_VERSION="${GITHUB_REF#refs/tags/v}"
+          FILE_VERSION=$(grep -oP 'data-version="\K[0-9]+\.[0-9]+\.[0-9]+' index.html | head -1)
+          echo "Тег: v$TAG_VERSION"
+          echo "Файл: v$FILE_VERSION"
+          if [ "$TAG_VERSION" != "$FILE_VERSION" ]; then
+            echo "::error::Версия в теге не совпадает с версией в файле"
+            exit 1
+          fi
+
+      - name: Посчитать SHA-256
+        id: hash
+        run: |
+          HASH=$(sha256sum index.html | cut -d' ' -f1)
+          echo "hash=$HASH" >> $GITHUB_OUTPUT
+          echo "SHA-256: $HASH"
+
+      - name: Создать Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: index.html
+          generate_release_notes: true
+          draft: false
+          prerelease: false
+          body: |
+            ## Emergency Help ${{ github.ref_name }}
+
+            Первая помощь для не медиков. 14 алгоритмов. Работает офлайн.
+
+            **Скачать:** `index.html` ниже
+            **Открыть:** https://stomvrn.github.io/emergency-help/
+
+            ### SHA-256
