@@ -1,0 +1,32 @@
+# OS
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+Desktop.ini
+
+# Редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Секреты
+.env
+.env.local
+*.key
+*.pem
+
+# Личное — никогда не коммитить
+private/
+*.private.*
+*.local.*
+
+# Логи
+*.log
+npm-debug.log*
+
+# Временные
+*.tmp
+.cache/
