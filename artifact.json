@@ -1,0 +1,36 @@
+{
+  "urn": "urn:vanxo:artifact:emergency-help:2.4.0",
+  "name": "Emergency Help",
+  "slug": "emergency-help",
+  "version": "2.4.0",
+  "status": "live",
+  "scope": "public",
+  "category": "Инструмент",
+  "type": "Инструмент",
+  "tags": [
+    "medical",
+    "first-aid",
+    "offline",
+    "single-file",
+    "html",
+    "healthcare",
+    "emergency",
+    "privacy",
+    "no-tracking",
+    "cc0"
+  ],
+  "description": "Первая помощь для не медиков. 14 алгоритмов. Офлайн.",
+  "longDescription": "Справочник первой помощи для не медиков. 14 алгоритмов по приказу Минздрава РФ № 220н от 03.05.2024. Работает офлайн, без регистрации, без сбора данных. Можно распечатать.",
+  "audience": "Врачи, фельдшеры, любой человек без медобразования",
+  "license": "CC0",
+  "author": "urn:vanxo:system",
+  "links": {
+    "demo": "https://stomvrn.github.io/emergency-help/",
+    "repo": "https://github.com/stomvrn/emergency-help"
+  },
+  "medical": true,
+  "offline": true,
+  "singleFile": true,
+  "releaseHistory": ["2.4.0", "2.3.0", "2.2.0", "2.0.0", "1.0.0"],
+  "generatedAt": "2026-10-11T00:00:00.000Z"
+}
