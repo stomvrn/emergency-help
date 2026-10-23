@@ -1,8 +1,8 @@
 {
-  "urn": "urn:vanxo:artifact:emergency-help:2.4.0",
+  "urn": "urn:vanxo:artifact:emergency-help:2.5.3",
   "name": "Emergency Help",
   "slug": "emergency-help",
-  "version": "2.4.0",
+  "version": "2.5.3",
   "status": "live",
   "scope": "public",
   "category": "Инструмент",
@@ -19,8 +19,8 @@
     "no-tracking",
     "cc0"
   ],
-  "description": "Первая помощь для не медиков. 14 алгоритмов. Офлайн.",
-  "longDescription": "Справочник первой помощи для не медиков. 14 алгоритмов по приказу Минздрава РФ № 220н от 03.05.2024. Работает офлайн, без регистрации, без сбора данных. Можно распечатать.",
+  "description": "Первая помощь для не медиков. 16 карточек (14 алгоритмов + 2 справки). Офлайн.",
+  "longDescription": "Справочник первой помощи для не медиков. 14 алгоритмов и 2 справки по приказу Минздрава РФ № 220н от 03.05.2024. Работает офлайн, без регистрации, без сбора данных. Можно распечатать. Не медизделие.",
   "audience": "Врачи, фельдшеры, любой человек без медобразования",
   "license": "CC0",
   "author": "urn:vanxo:system",
@@ -28,9 +28,9 @@
     "demo": "https://stomvrn.github.io/emergency-help/",
     "repo": "https://github.com/stomvrn/emergency-help"
   },
-  "medical": true,
+  "medical": false,
   "offline": true,
   "singleFile": true,
-  "releaseHistory": ["2.4.0", "2.3.0", "2.2.0", "2.0.0", "1.0.0"],
-  "generatedAt": "2026-10-11T00:00:00.000Z"
+  "releaseHistory": ["2.5.3", "2.5.2", "2.5.1", "2.5.0", "2.4.0", "2.3.0", "2.2.0", "2.0.0", "1.0.0"],
+  "generatedAt": "2026-10-23T00:00:00.000Z"
 }
