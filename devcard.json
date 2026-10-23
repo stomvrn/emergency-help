@@ -1,0 +1,18 @@
+{
+  "name": "Иван Холин",
+  "username": "stomvrn",
+  "role": "developer",
+  "bio": "Врач-стоматолог, 25 лет практики. Разработчик офлайн single-file HTML-инструментов.",
+  "stack": ["HTML", "JavaScript", "offline-first", "CSP", "single-file"],
+  "links": {
+    "site": "https://stomvrn.github.io/emergency-help/",
+    "github": "https://github.com/stomvrn"
+  },
+  "projects": [
+    {
+      "name": "Emergency Help",
+      "repo": "https://github.com/stomvrn/emergency-help",
+      "description": "Первая помощь для не медиков. 16 карточек. Офлайн."
+    }
+  ]
+}
