@@ -1,56 +1,49 @@
 # Emergency Help
 
-> Первая помощь для не медиков. 14 алгоритмов. Работает офлайн.
+> Первая помощь для не медиков. 16 карточек (14 алгоритмов + 2 справки). Работает офлайн. Не медизделие.
+
+URN: urn:vanxo:artifact:emergency-help:2.5.3
+Версия: 2.5.3
+Лицензия: CC0 · Public Domain
+Демо: https://stomvrn.github.io/emergency-help/
+Репозиторий: https://github.com/stomvrn/emergency-help
 
 ## Что это
 
-Справочник первой помощи для не медиков. 14 алгоритмов по приказу Минздрава РФ № 220н от 03.05.2024. Работает офлайн, без регистрации, без сбора данных. Можно распечатать.
+Справочно-образовательный инструмент для оказания первой помощи людьми без медицинского образования. Single-file HTML, работает офлайн, без регистрации, без сбора данных.
 
-## Принципы
+## Алгоритмы
 
-- Single-file HTML — один файл, ноль зависимостей
-- Работает офлайн (`file://`)
-- Без телеметрии, без cookies, без сетевых запросов
-- Данные не покидают устройство
+- [Человек не дышит (СЛР)](https://stomvrn.github.io/emergency-help/#/cpr)
+- [Без сознания, дышит](https://stomvrn.github.io/emergency-help/#/unconscious-breathing)
+- [Сильное кровотечение](https://stomvrn.github.io/emergency-help/#/bleeding)
+- [Инсульт](https://stomvrn.github.io/emergency-help/#/stroke)
+- [Инфаркт](https://stomvrn.github.io/emergency-help/#/heart-attack)
+- [Подавился (взрослый)](https://stomvrn.github.io/emergency-help/#/choking-adult)
+- [Подавился (ребёнок до года)](https://stomvrn.github.io/emergency-help/#/choking-baby)
+- [Анафилаксия](https://stomvrn.github.io/emergency-help/#/anaphylaxis)
+- [Судороги](https://stomvrn.github.io/emergency-help/#/seizure)
+- [Ожог](https://stomvrn.github.io/emergency-help/#/burn)
+- [Отравление](https://stomvrn.github.io/emergency-help/#/poisoning)
+- [Гипогликемия](https://stomvrn.github.io/emergency-help/#/hypoglycemia)
+- [Обморожение](https://stomvrn.github.io/emergency-help/#/frostbite)
+- [Утопление](https://stomvrn.github.io/emergency-help/#/drowning)
 
-## Медицинский контекст
+## Справки
 
-Информационный материал. Не является медицинской рекомендацией. Все решения — после консультации с врачом.
+- [Как вызвать скорую](https://stomvrn.github.io/emergency-help/#/call)
+- [Закон о помощи](https://stomvrn.github.io/emergency-help/#/legal)
 
 ## Источники
 
 - Приказ Минздрава России № 220н от 03.05.2024
-- Методические материалы МЧС
-- ФЗ-323 от 21.11.2011 «Об основах охраны здоровья граждан»
+- Материалы МЧС России
+- Требует проверки в актуальной редакции
 
-## Алгоритмы
+## Дисклеймер
 
-1. Остановка дыхания — непрямой массаж сердца
-2. Потеря сознания, дыхание сохранено — устойчивое боковое положение
-3. Сильное кровотечение — прямое давление, давящая повязка
-4. Удушье — приём Геймлиха
-5. Ожог — охлаждение, стерильная повязка
-6. Отравление — не вызывать рвоту
-7. Судороги — обезопасить пространство
-8. Утопление — извлечь, проверить дыхание, начать СЛР
-9. Обморок — уложить, приподнять ноги
-10. Инфаркт — покой, нитроглицерин, вызвать скорую
-11. Инсульт — тест FAST, время критично
-12. Перелом — иммобилизация, не вправлять
-13. Шок — уложить, укрыть, не поить
-14. Анафилаксия — адреналин, вызвать скорую
-
-## Источники
-
-URN: `urn:vanxo:artifact:emergency-help:2.4.0`
-
-Demo: https://stomvrn.github.io/emergency-help/
-Repo: https://github.com/stomvrn/emergency-help
+Not a medical device. For educational and reference use only. Not intended for diagnosis, treatment, or clinical decision-making.
 
 ## Лицензия
 
-CC0 · Public Domain. Свободно к использованию без указания авторства.
-
-## Автор
-
-Холин Иван Алексеевич (VanXo). GitHub: [@stomvrn](https://github.com/stomvrn), Telegram: [@ivan_kholin_digital](https://t.me/ivan_kholin_digital).
+CC0 · Public Domain. Копируй, печатай, отправляй — свободно.
